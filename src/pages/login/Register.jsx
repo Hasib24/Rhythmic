@@ -26,8 +26,11 @@ const Register = () => {
                 <input {...register("email", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type="email" name="email" id="email" placeholder='Enter email' /> <br />
                 {errors.email?.type === 'required' && <p className='text-red-600 -mt-3 pl-1'>Your email is required</p>}
                 
-                <input {...register("password", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type={show ? 'password' : 'text'} name="password" id="password" placeholder='Password'/> <br />
-                
+                <input {...register("password", { required: true, minLength :6, maxLength: 8, pattern: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].)(?=.*[a-z])/ })}  className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type={show ? 'password' : 'text'} name="password" id="password" placeholder='Password'/> <br />
+                {errors.password?.type==="required" && <span className='text-red-500 -mt-3 pl-1'>Password is required</span>}
+                {errors.password?.type==="maxLength" && <span className='text-red-500 -mt-3 pl-1'>Maximum 8 cherecter</span>}
+                {errors.password?.type==="minLength" && <span className='text-red-500 -mt-3 pl-1'>Minimum 6 cherecter</span>}
+                {errors.password?.type==="pattern" && <span className='text-red-500 -mt-3 pl-1'>Weak password</span>}
                 
                 <input className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type={show ? 'password' : 'text'} name="password" id="password" placeholder='Confirm password'/> <br />
                 <p onClick={()=>{setShow(!show)}}>{show ? <span>show password</span> : <span>hide password</span> }</p>

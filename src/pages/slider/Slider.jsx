@@ -6,26 +6,14 @@ const Slider = () => {
     return (
         <section>
 
-            <div className='container mx-auto'>
+            <div className='container mx-auto h-[90vh] border'>
 
-                <Carousel>
+                <Carousel autoPlay={true} interval={700}>
                     <div>
-                        <img src="https://images.pexels.com/photos/2692080/pexels-photo-2692080.jpeg?auto=compress&cs=tinysrgb&w=600" />
+                        <img className='' src="https://images.pexels.com/photos/2692080/pexels-photo-2692080.jpeg?auto=compress&cs=tinysrgb&w=600" />
 
                     </div>
-                    <div>
-                        <img src="https://images.pexels.com/photos/2692080/pexels-photo-2692080.jpeg?auto=compress&cs=tinysrgb&w=600" />
-
-                    </div>
-                    <div>
-                        <img src="https://images.pexels.com/photos/2692080/pexels-photo-2692080.jpeg?auto=compress&cs=tinysrgb&w=600" />
-
-                    </div>
-                    <div>
-                        <img src="https://images.pexels.com/photos/2692080/pexels-photo-2692080.jpeg?auto=compress&cs=tinysrgb&w=600" />
-
-                    </div>
-
+                    
                 </Carousel>
             </div>
         </section>

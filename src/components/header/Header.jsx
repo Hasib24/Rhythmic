@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import { SiMusicbrainz } from 'react-icons/si';
@@ -6,9 +6,12 @@ import { SiMusicbrainz } from 'react-icons/si';
 import { GoThreeBars } from 'react-icons/go';
 import { BsMoonStars } from 'react-icons/bs';
 import { BiSun } from 'react-icons/bi';
+import { AuthContex } from '../../providers/AuthProvider';
 
 
 const Header = () => {
+
+    const {user, logOut} = useContext(AuthContex)
 
     const [ theme, setTheme ] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
 

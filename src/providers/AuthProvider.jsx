@@ -1,30 +1,47 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import app from '../../firebase.config';
 
-
-
 const gglProvider = new GoogleAuthProvider();
-
 
 export const AuthContex = createContext(null)
 
 const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+
+    const [user, setUser] = useState(null);
+    const [ loader, setLoader ] = useState(null)
     
 
     const googleSignIn = () =>{
         return signInWithPopup(auth, gglProvider)
     }
 
+    const logOut = () =>{
+        return signOut(auth)
+    }
+
+
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
+            setUser(currentUser)
+            setLoader(null)
+        })
+
+        //stop observing after unmount
+        return unsubscribe()
+    },[])
+
 
     const contextData ={
         user,
         setUser,
-        googleSignIn
+        loader,
+        setLoader,
+        googleSignIn,
+        logOut
     }
 
     return (

@@ -1,37 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { useForm } from "react-hook-form";
+import { AuthContex } from '../../providers/AuthProvider';
 
 const Register = () => {
-    const passRef = useRef()
-    const cPassRef = useRef()
+
     const [show, setShow] = useState(null);
-    const [ passMatched, setPassMatched ] = useState(null);
-    // const [regDisable, setRegDisable] = useState(null)
+    const {setUser, createUser, updateUser } = useContext(AuthContex)
+
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data =>{
 
+        createUser( data.email, data.password )
+        .then(res =>{
+            updateUser(data.name, data.photourl)
+            .then(()=>{
+                //profile updated
+            })
+            .catch((err)=>console.log(err))
 
-    // const handlePassMatched = () =>{
-       
-    //     const pass = passRef.current.value;
-    //     const cPass = cPassRef.current.value;
+            res.user.displayName = data.name;
+            res.user.photoURL = data.photourl;
+            setUser(res.user)
+        })
+    }
 
-    //     if(pass == cPass){
-    //         setPassMatched(false)
-    //         setRegDisable(null)
-    //         // console.log(`pass matched`);
-
-    //     }else{
-    //         setPassMatched(true)
-    //         setRegDisable(true)
-    //         // console.log(`pass not matched`);
-    //     }
-    
     
 
 
@@ -54,7 +51,6 @@ const Register = () => {
                 
                 <p onClick={()=>{setShow(!show)}}>{show ? <span>Show password</span> : <span>Hide password</span> }</p>
                 <input {...register("cpassword", { required: true })}  className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type={show ? 'password' : 'text'} name="cpassword" id="cpassword" placeholder='Confirm password'/> <br />
-                {passMatched ? <p className='text-red-600 -mt-3 pl-1'>Password matched</p>: <></>}
                 
                 <input {...register("photourl", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto' type="url" name="photourl" id="photourl" placeholder='Photo url' />
                 {errors.photourl?.type === 'required' && <p className='text-red-600 -mt-3 pl-1'>Photo url is required</p>}

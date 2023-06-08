@@ -82,7 +82,7 @@ const Header = () => {
                 </div>
                 <nav className={`text-xl flex flex-col justify-between items-center md:block border py-6 ${responsiveMenu ? `absolute right-4 top-20  rounded-md` : `absolute right-2 -top-48`} md:static md:bg-inherit duration-500`}>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/'>Home</NavLink>
-                    <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/instructors'>Instructors</NavLink>
+                    <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/instractors'>Instractors</NavLink>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/classes'>Classes</NavLink>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/dashboard'>Dashboard</NavLink>
                     {

@@ -5,6 +5,7 @@ import ErrorLayout from "../layouts/ErrorLayout";
 import Login from "../pages/login/Login";
 import Register from "../pages/login/Register";
 import Instructors from "../pages/instructors/Instructors";
+import Classes from "../pages/classes/Classes";
 
 const Router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const Router = createBrowserRouter([
         {
           path : "/instractors",
           element: <Instructors></Instructors>
+        },
+        {
+          path : "/classes",
+          element: <Classes></Classes>
         },
         {
           path : "/login",

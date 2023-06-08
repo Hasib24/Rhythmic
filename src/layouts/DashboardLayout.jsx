@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 // import { FaBeer } from 'react-icons/fa';
 import { TbLayoutSidebarRightCollapse } from 'react-icons/tb';
@@ -25,8 +25,10 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
                 <ul className="flex justify-center menu p-4 w-80 h-full bg-base-200 text-base-content">
                   {/* Sidebar content here */}
-                  <li><a>Sidebar Item 1</a></li>
-                  <li><a>Sidebar Item 2</a></li>
+                  
+                  <li><NavLink to='myselectedclasses'>My Selected Classes</NavLink></li>
+                  <li><NavLink to='myenrolledclasses'>My Enrolled Classes</NavLink></li>
+                  
                 </ul>
 
               </div>

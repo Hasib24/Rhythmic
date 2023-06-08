@@ -7,7 +7,9 @@ import Register from "../pages/login/Register";
 import Instructors from "../pages/instructors/Instructors";
 import Classes from "../pages/classes/Classes";
 import DashboardLayout from "../layouts/DashboardLayout";
-import MyCar from "../layouts/MyCar";
+
+import MySelectedClasses from "../pages/dashboard/selectedclasses/MySelectedClasses";
+import MyEnrolledClasses from "../pages/dashboard/enrolled/MyEnrolledClasses";
 
 const Router = createBrowserRouter([
     {
@@ -41,8 +43,12 @@ const Router = createBrowserRouter([
       element: <DashboardLayout></DashboardLayout>,
       children: [
         {
-          path: "mycart",
-          element:<MyCar></MyCar>
+          path: "myselectedclasses",
+          element:<MySelectedClasses></MySelectedClasses>
+        },
+        {
+          path: "myenrolledclasses",
+          element:<MyEnrolledClasses></MyEnrolledClasses>
         }
       ]
     },

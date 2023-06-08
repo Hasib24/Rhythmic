@@ -15,23 +15,21 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
-    console.log(errors);
 
     const handlePassMatched = () =>{
        
         const pass = passRef.current.value;
         const cPass = cPassRef.current.value;
-        console.log(cPass);
-        console.log(pass);
+
         if(pass == cPass){
             setPassMatched(false)
             setRegDisable(null)
-            console.log(`pass matched`);
+            // console.log(`pass matched`);
 
         }else{
             setPassMatched(true)
             setRegDisable(true)
-            console.log(`pass not matched`);
+            // console.log(`pass not matched`);
         }
     }
     

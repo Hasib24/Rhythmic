@@ -10,7 +10,7 @@ const ClassCard = () => {
             <h2>Available seats</h2>
             <div className="card-actions justify-between">
                 <h2 className='text-2xl font-bold'>Price</h2>
-                <button className="btn btn-primary">Enroll Now</button>
+                <button className="btn btn-primary">Select Now</button>
             </div>
           </div>
         </div>

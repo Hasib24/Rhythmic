@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink, Outlet } from "react-router-dom";
-import {FaShoppingCart, FaWallet, FaCalendarAlt, FaHome, FaUtensils, FaBook, FaUsers } from 'react-icons/fa';
+
+// import { FaBeer } from 'react-icons/fa';
+import { TbLayoutSidebarRightCollapse } from 'react-icons/tb';
 
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
@@ -14,14 +16,14 @@ const DashboardLayout = () => {
 
               <div className="drawer-content flex flex-col">
                 {/* Page content here */}
-                <label htmlFor="my-drawer-2" className="btn w-10 drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn w-16  drawer-button lg:hidden"> <TbLayoutSidebarRightCollapse className='text-3xl'></TbLayoutSidebarRightCollapse> </label>
                 <Outlet></Outlet>
 
               </div> 
 
               <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                <ul className="flex justify-center menu p-4 w-80 h-full bg-base-200 text-base-content">
                   {/* Sidebar content here */}
                   <li><a>Sidebar Item 1</a></li>
                   <li><a>Sidebar Item 2</a></li>

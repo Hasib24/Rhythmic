@@ -3,10 +3,14 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
+import useTokenGen from '../../hooks/useTokenGen';
 
 const GoogleLoginBtn = ({children}) => {
 
-    const { setUser, googleSignIn } = useContext(AuthContex)
+    const { user, setUser, googleSignIn } = useContext(AuthContex)
+
+                // Getting JWT Token 
+                useTokenGen(user?.email)
 
     const location = useLocation()
 
@@ -23,13 +27,10 @@ const GoogleLoginBtn = ({children}) => {
             axios.post('/user', userData)
             .then(response => console.log(response))
             .catch(err => console.log(err))
-            
+
             setUser(result.user)
 
-            // Getting JWT Token 
-            axios.post('/jwt', { email: result.user.email })
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
+
         })
         .catch(err=> console.log(err))
         

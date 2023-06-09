@@ -5,11 +5,16 @@ import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { useForm } from "react-hook-form";
 import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
+import useTokenGen from '../../hooks/useTokenGen';
 
 const Register = () => {
 
     const [show, setShow] = useState(null);
-    const {setUser, createUser, updateUser } = useContext(AuthContex)
+    const {user, setUser, createUser, updateUser } = useContext(AuthContex)
+
+    
+    // Getting JWT Token 
+    useTokenGen(user?.email)
 
 
 

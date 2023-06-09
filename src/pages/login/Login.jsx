@@ -5,12 +5,17 @@ import { FcGoogle } from 'react-icons/fc';
 import { AuthContex } from '../../providers/AuthProvider';
 
 import { useForm } from "react-hook-form";
+import useTokenGen from '../../hooks/useTokenGen';
 
 
 
 const Login = () => {
   
-    const { setUser, signInUser } = useContext(AuthContex)
+    const { user, setUser, signInUser } = useContext(AuthContex)
+
+        
+    // Getting JWT Token 
+    useTokenGen(user?.email)
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();

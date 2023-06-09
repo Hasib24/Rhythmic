@@ -9,8 +9,8 @@ const GoogleLoginBtn = ({children}) => {
 
     const { user, setUser, googleSignIn } = useContext(AuthContex)
 
-                // Getting JWT Token 
-                useTokenGen(user?.email)
+    // Getting JWT Token 
+    useTokenGen(user?.email)
 
     const location = useLocation()
 

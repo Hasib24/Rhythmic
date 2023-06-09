@@ -9,7 +9,7 @@ const useTokenGen = (email) => {
             if(user?.email){
 
                 axios.post('/jwt', { email : email })
-                .then(response => console.log(response))
+                .then(response => localStorage.setItem('jwtAccessToken', JSON.stringify(response.data)))
                 .catch(error => console.log(error))
         
             }

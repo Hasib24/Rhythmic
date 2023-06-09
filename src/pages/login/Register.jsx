@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { useForm } from "react-hook-form";
 import { AuthContex } from '../../providers/AuthProvider';
+import axios from 'axios';
 
 const Register = () => {
 
@@ -20,6 +21,15 @@ const Register = () => {
             updateUser(data.name, data.photourl)
             .then(()=>{
                 //profile updated
+                //send user data to DB for each successful regestatison
+                const userData ={
+                    name : data.name,
+                    email : data.email,
+                    role : ''
+                }
+                axios.post('http://localhost:5000/user', userData)
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
             })
             .catch((err)=>console.log(err))
 

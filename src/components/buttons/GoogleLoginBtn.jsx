@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-
-import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
 import useTokenGen from '../../hooks/useTokenGen';
@@ -11,9 +9,6 @@ const GoogleLoginBtn = ({children}) => {
 
     // Getting JWT Token 
     useTokenGen(user?.email)
-
-    const location = useLocation()
-
 
 
     const handleClick = () =>{

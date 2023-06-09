@@ -6,6 +6,7 @@ import { AuthContex } from '../../providers/AuthProvider';
 
 import { useForm } from "react-hook-form";
 import useTokenGen from '../../hooks/useTokenGen';
+import axios from 'axios';
 
 
 
@@ -22,7 +23,10 @@ const Login = () => {
     const onSubmit = data =>{
         // console.log(data);
         signInUser(data.email, data.password)
-        .then(res =>setUser(res.user))
+        .then(res =>{
+            setUser(res.user)
+            axios.get(`/user?email=${res.user.email}`)
+        })
         .catch(error =>console.log(error))
     }
 

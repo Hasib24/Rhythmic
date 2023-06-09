@@ -20,10 +20,16 @@ const GoogleLoginBtn = ({children}) => {
                 email : result.user.email,
                 role : ''
             }
-            axios.post('http://localhost:5000/user', userData)
+            axios.post('/user', userData)
             .then(response => console.log(response))
             .catch(err => console.log(err))
-            // setUser(result.user)
+            
+            setUser(result.user)
+
+            // Getting JWT Token 
+            axios.post('/jwt', { email: result.user.email })
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
         })
         .catch(err=> console.log(err))
         

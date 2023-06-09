@@ -5,6 +5,13 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './routes/Router'
 import AuthProvider from './providers/AuthProvider'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.interceptors.request.use((request)=>{
+  
+  return request
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>

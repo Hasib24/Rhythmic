@@ -27,7 +27,7 @@ const Register = () => {
                     email : data.email,
                     role : ''
                 }
-                axios.post('http://localhost:5000/user', userData)
+                axios.post('/user', userData)
                 .then(response => console.log(response))
                 .catch(err => console.log(err))
             })

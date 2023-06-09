@@ -28,6 +28,9 @@ const DashboardLayout = () => {
                   
                   <li><NavLink to='myselectedclasses'>My Selected Classes</NavLink></li>
                   <li><NavLink to='myenrolledclasses'>My Enrolled Classes</NavLink></li>
+                  <li><NavLink to='manageclasses'>Manage Classes</NavLink></li>
+                  <li><NavLink to='manageusers'>Mamage Users</NavLink></li>
+
                   <div className="divider"></div> 
                   <li><NavLink to='/'>Home</NavLink></li>
                   <li><NavLink to='notice'>Notice</NavLink></li>

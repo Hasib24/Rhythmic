@@ -10,6 +10,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 
 import MySelectedClasses from "../pages/dashboard/selectedclasses/MySelectedClasses";
 import MyEnrolledClasses from "../pages/dashboard/enrolled/MyEnrolledClasses";
+import Help from "../pages/dashboard/help/Help";
+import Notes from "../pages/dashboard/notes/Notes";
+import Notice from "../pages/dashboard/notice/Notice";
 
 const Router = createBrowserRouter([
     {
@@ -49,6 +52,18 @@ const Router = createBrowserRouter([
         {
           path: "myenrolledclasses",
           element:<MyEnrolledClasses></MyEnrolledClasses>
+        },
+        {
+          path: "notes",
+          element:<Notes></Notes>
+        },
+        {
+          path: "notice",
+          element:<Notice></Notice>
+        },
+        {
+          path: "help",
+          element:<Help></Help>
         }
       ]
     },

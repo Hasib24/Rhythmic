@@ -28,6 +28,12 @@ const DashboardLayout = () => {
                   
                   <li><NavLink to='myselectedclasses'>My Selected Classes</NavLink></li>
                   <li><NavLink to='myenrolledclasses'>My Enrolled Classes</NavLink></li>
+                  <div className="divider"></div> 
+                  <li><NavLink to='/'>Home</NavLink></li>
+                  <li><NavLink to='notice'>Notice</NavLink></li>
+                  <li><NavLink to='notes'>Take a Note</NavLink></li>
+                  <li><NavLink to='help'>Help</NavLink></li>
+
                   
                 </ul>
 

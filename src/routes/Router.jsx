@@ -8,13 +8,17 @@ import Instructors from "../pages/instructors/Instructors";
 import Classes from "../pages/classes/Classes";
 import DashboardLayout from "../layouts/DashboardLayout";
 
-import MySelectedClasses from "../pages/dashboard/selectedclasses/MySelectedClasses";
-import MyEnrolledClasses from "../pages/dashboard/enrolled/MyEnrolledClasses";
-import Help from "../pages/dashboard/help/Help";
-import Notes from "../pages/dashboard/notes/Notes";
-import Notice from "../pages/dashboard/notice/Notice";
+import MySelectedClasses from "../pages/dashboard/student/selectedclasses/MySelectedClasses";
+import MyEnrolledClasses from "../pages/dashboard/student/enrolled/MyEnrolledClasses";
+import Help from "../pages/dashboard/general/help/Help";
+import Notes from "../pages/dashboard/general/notes/Notes";
+import Notice from "../pages/dashboard/general/notice/Notice";
 import ManageClasses from "../pages/dashboard/admin/ManageClasses";
 import ManageUsers from "../pages/dashboard/admin/ManageUsers";
+import Enrolledstudents from "../pages/dashboard/instractor/enrolledstudents/Enrolledstudents";
+import AddClass from "../pages/dashboard/instractor/addclass/AddClass";
+import MyClasses from "../pages/dashboard/instractor/myclasses/MyClasses";
+import Feedback from "../pages/dashboard/instractor/feedbackhub/Feedback";
 
 const Router = createBrowserRouter([
     {
@@ -47,6 +51,7 @@ const Router = createBrowserRouter([
       path: "dashboard",
       element: <DashboardLayout></DashboardLayout>,
       children: [
+        // admin [ For admin only ]
         {
           path: "manageclasses",
           element:<ManageClasses></ManageClasses>
@@ -55,6 +60,30 @@ const Router = createBrowserRouter([
           path: "manageusers",
           element:<ManageUsers></ManageUsers>
         },
+
+        // instructor [ For instructors only ]
+        {
+          path: "addclass",
+          element:<AddClass></AddClass>
+        },
+        {
+          path: "myclasses",
+          element:<MyClasses></MyClasses>
+        },
+        {
+          path: "enrolledstudents",
+          element:<Enrolledstudents></Enrolledstudents>
+        },
+        {
+          path: "Feedback",
+          element:<Feedback></Feedback>
+        },
+        {
+          path: "enrolledstudents",
+          element:<Enrolledstudents></Enrolledstudents>
+        },
+
+        // students [ For every one except instructor and admin ]
         {
           path: "myselectedclasses",
           element:<MySelectedClasses></MySelectedClasses>
@@ -63,6 +92,8 @@ const Router = createBrowserRouter([
           path: "myenrolledclasses",
           element:<MyEnrolledClasses></MyEnrolledClasses>
         },
+
+        // general [ For every one ]
         {
           path: "notes",
           element:<Notes></Notes>

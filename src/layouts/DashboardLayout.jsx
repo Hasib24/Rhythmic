@@ -21,13 +21,22 @@ const DashboardLayout = () => {
 
               </div> 
 
-              <div className="drawer-side">
+              <div className="drawer-side h-[85vh] border">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-                <ul className="flex justify-center menu p-4 w-80 h-full bg-base-200 text-base-content">
+                <ul className="flex justify-end menu p-4 w-80 h-full bg-base-200 text-base-content">
                   {/* Sidebar content here */}
                   
-                  <li><NavLink to='myselectedclasses'>My Selected Classes</NavLink></li>
-                  <li><NavLink to='myenrolledclasses'>My Enrolled Classes</NavLink></li>
+                  {/* students route  */}
+                  <li><NavLink to='myselectedclasses'>My Selecttions</NavLink></li>
+                  <li><NavLink to='myenrolledclasses'>My Enrolls</NavLink></li>
+                  
+                  {/* Instructor route  */}
+                  <li><NavLink to='addclass'>Add Class</NavLink></li>
+                  <li><NavLink to='myclasses'>My Classes</NavLink></li>
+                  <li><NavLink to='enrolledstudents'>Enrolded Students</NavLink></li>
+                  <li><NavLink to='Feedback'>Feedback Hub</NavLink></li>
+
+                  {/* Admin route */}
                   <li><NavLink to='manageclasses'>Manage Classes</NavLink></li>
                   <li><NavLink to='manageusers'>Mamage Users</NavLink></li>
 

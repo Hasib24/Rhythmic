@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 import app from '../../firebase.config';
+import axios from 'axios';
 
 const gglProvider = new GoogleAuthProvider();
 
@@ -42,6 +43,15 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser=>{
             setUser(currentUser)
             setLoader(null)
+            
+            // check user role 
+            axios.get(`/user?email=${currentUser.email}`)
+            .then(response =>{
+                setRole(response.data.role)
+                setLoader(null)
+                
+            })
+            .catch(error => console.log(error))
         })
 
         //stop observing after unmount

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 // import { FaBeer } from 'react-icons/fa';
@@ -6,8 +6,12 @@ import { TbLayoutSidebarRightCollapse } from 'react-icons/tb';
 
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
+import { AuthContex } from '../providers/AuthProvider';
 
 const DashboardLayout = () => {
+
+    const { user, role } = useContext(AuthContex);
+
     return (
         <section>
             <Header></Header>
@@ -27,18 +31,27 @@ const DashboardLayout = () => {
                   {/* Sidebar content here */}
                   
                   {/* students route  */}
-                  <li><NavLink to='myselectedclasses'>My Selecttions</NavLink></li>
-                  <li><NavLink to='myenrolledclasses'>My Enrolls</NavLink></li>
+                  {role ==='' ? <>
+                    <li><NavLink to='myselectedclasses'>My Selecttions</NavLink></li>
+                    <li><NavLink to='myenrolledclasses'>My Enrolls</NavLink></li>
+                  </>:<></>}
                   
                   {/* Instructor route  */}
-                  <li><NavLink to='addclass'>Add Class</NavLink></li>
-                  <li><NavLink to='myclasses'>My Classes</NavLink></li>
-                  <li><NavLink to='enrolledstudents'>Enrolded Students</NavLink></li>
-                  <li><NavLink to='Feedback'>Feedback Hub</NavLink></li>
+                  {role==='instructor' ? <>
+                    <li><NavLink to='addclass'>Add Class</NavLink></li>
+                    <li><NavLink to='myclasses'>My Classes</NavLink></li>
+                    <li><NavLink to='enrolledstudents'>Enrolded Students</NavLink></li>
+                    <li><NavLink to='Feedback'>Feedback Hub</NavLink></li>
+                  
+                  </>: <></>}
 
                   {/* Admin route */}
+                  { role ==='admin' ? <>
                   <li><NavLink to='manageclasses'>Manage Classes</NavLink></li>
                   <li><NavLink to='manageusers'>Mamage Users</NavLink></li>
+                  </> : <></>}
+                  
+                
 
                   <div className="divider"></div> 
                   <li><NavLink to='/'>Home</NavLink></li>

@@ -86,7 +86,7 @@ const Header = () => {
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/classes'>Classes</NavLink>
                     {
                         user ? <>
-                                    <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/dashboard'>Dashboard</NavLink>
+                                    <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/dashboard/dashboard'>Dashboard</NavLink>
 
                                     <div className='inline'>
                                         <img className='w-10 border-2 border-slate-500 cursor-pointer rounded-full  inline' src={user.photoURL} alt="Photo" onClick={()=>setProfileMenu(!profileMenu)}/>

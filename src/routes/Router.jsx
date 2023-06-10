@@ -20,6 +20,7 @@ import AddClass from "../pages/dashboard/instractor/addclass/AddClass";
 import MyClasses from "../pages/dashboard/instractor/myclasses/MyClasses";
 import Feedback from "../pages/dashboard/instractor/feedbackhub/Feedback";
 import PrivateRoutes from "./PrivateRoutes";
+import DashboardHome from "../pages/dashboard/general/dashboard/DashboardHome";
 
 const Router = createBrowserRouter([
     {
@@ -95,6 +96,10 @@ const Router = createBrowserRouter([
         },
 
         // general [ For every one ]
+        {
+          path: "dashboard",
+          element: <DashboardHome></DashboardHome>
+        },
         {
           path: "notes",
           element:<Notes></Notes>

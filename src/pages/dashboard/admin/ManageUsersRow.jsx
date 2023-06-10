@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useRef, useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-const ManageUsersRow = ({user, index}) => {
+const ManageUsersRow = ({user, index, refetch}) => {
+    const roleRef = useRef()
 
     const [showProceedBtn, setShowProceedBtn] = useState(false)
 
@@ -11,6 +13,22 @@ const ManageUsersRow = ({user, index}) => {
             setShowProceedBtn(false)
         }else{setShowProceedBtn(true)}
         
+    }
+
+    const handleProceedBtn =(email)=>{
+        
+        const userData ={
+            email : email,
+            role : roleRef.current.value
+        }
+        axios.post('/usersrole', userData)
+        .then(response =>{
+            console.log(response)
+            
+        })
+        .catch(err => console.log(err))
+
+        refetch()
     }
 
     return (
@@ -29,13 +47,13 @@ const ManageUsersRow = ({user, index}) => {
             </td>
             {/* role  */}
             <td className="px-6 py-4" colSpan={2}>
-                <select defaultValue={user.role} onChange={(e)=>handleShowProceedBtn(e)} className="select select-sm">
+                <select defaultValue={user.role} onChange={(e)=>handleShowProceedBtn(e)} ref={roleRef} className="select select-sm">
                     <option value=''>Student</option>
                     <option value='instructor'>Instructor</option>
                     <option value='admin'>Admin</option>
                 </select>
 
-                {showProceedBtn && <button className='btn btn-outline btn-sm btn-accent'>Proceed</button>}    
+                {showProceedBtn && <button onClick={()=>handleProceedBtn(user.email)} className='btn btn-outline btn-sm btn-accent'>Proceed</button>}    
             </td>
             {/* action  */}
             <td>

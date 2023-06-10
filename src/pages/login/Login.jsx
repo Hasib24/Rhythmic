@@ -12,7 +12,7 @@ import axios from 'axios';
 
 const Login = () => {
   
-    const { user, setUser, signInUser } = useContext(AuthContex)
+    const { user, setUser, setRole, signInUser } = useContext(AuthContex)
 
         
     // Getting JWT Token 
@@ -26,6 +26,8 @@ const Login = () => {
         .then(res =>{
             setUser(res.user)
             axios.get(`/user?email=${res.user.email}`)
+            .then(response =>setRole(response.data.role))
+            .catch(error => console.log(error))
         })
         .catch(error =>console.log(error))
     }

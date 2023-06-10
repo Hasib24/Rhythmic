@@ -10,7 +10,7 @@ import useTokenGen from '../../hooks/useTokenGen';
 const Register = () => {
 
     const [show, setShow] = useState(null);
-    const {user, setUser, createUser, updateUser } = useContext(AuthContex)
+    const {user, setUser, setRole, createUser, updateUser } = useContext(AuthContex)
 
     
     // Getting JWT Token 
@@ -41,6 +41,7 @@ const Register = () => {
             res.user.displayName = data.name;
             res.user.photoURL = data.photourl;
             setUser(res.user)
+            setRole('')
         })
     }
 

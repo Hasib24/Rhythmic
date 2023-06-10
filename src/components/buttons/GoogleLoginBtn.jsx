@@ -5,7 +5,7 @@ import useTokenGen from '../../hooks/useTokenGen';
 
 const GoogleLoginBtn = ({children}) => {
 
-    const { user, setUser, googleSignIn } = useContext(AuthContex)
+    const { user, setUser, role, setRole, googleSignIn } = useContext(AuthContex)
 
     // Getting JWT Token 
     useTokenGen(user?.email)
@@ -20,7 +20,11 @@ const GoogleLoginBtn = ({children}) => {
                 role : ''
             }
             axios.post('/user', userData)
-            .then(response => console.log(response))
+            .then(response =>{
+                console.log(response)
+                setRole(response.data.role)
+
+            })
             .catch(err => console.log(err))
 
             setUser(result.user)

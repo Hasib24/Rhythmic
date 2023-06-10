@@ -1,14 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ManageUsersRow from './ManageUsersRow';
 import axios from 'axios';
 import { AuthContex } from '../../../providers/AuthProvider';
 
 const ManageUsers = () => {
     const {user} = useContext(AuthContex)
+    const [ allUsers, setAllUsers ] = useState([])
 
     useEffect(()=>{
         axios.get(`/users?email=${user.email}`)
-        .then(response =>console.log(response.data))
+        .then(response =>setAllUsers(response.data))
         .catch(error => console.log(error.response))
 
     },[])
@@ -40,12 +41,8 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {/* // table data  */}
-                    <ManageUsersRow></ManageUsersRow>
-                    <ManageUsersRow></ManageUsersRow>
-                    <ManageUsersRow></ManageUsersRow>
-                    <ManageUsersRow></ManageUsersRow>
-                    <ManageUsersRow></ManageUsersRow>
-                    <ManageUsersRow></ManageUsersRow>
+                    {allUsers.map((user, index, arry) =><ManageUsersRow user={user} key={index} index={index}></ManageUsersRow>)}
+
                 </tbody>
             </table>
         </div>

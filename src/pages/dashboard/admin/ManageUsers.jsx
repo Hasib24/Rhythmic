@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ManageUsersRow from './ManageUsersRow';
 import axios from 'axios';
+import { AuthContex } from '../../../providers/AuthProvider';
 
 const ManageUsers = () => {
+    const {user} = useContext(AuthContex)
 
     useEffect(()=>{
-        axios.get('/users')
+        axios.get(`/users?email=${user.email}`)
         .then(response =>console.log(response.data))
         .catch(error => console.log(error.response))
 

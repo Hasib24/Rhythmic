@@ -7,6 +7,13 @@ import router from './routes/Router'
 import AuthProvider from './providers/AuthProvider'
 import axios from 'axios'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+// Create a client
+const queryClient = new QueryClient()
+
+
+
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.interceptors.request.use((request)=>{
   request.headers.authorizatn = `bearer ${JSON.parse(localStorage.getItem('jwtAccessToken'))}`
@@ -14,7 +21,9 @@ axios.interceptors.request.use((request)=>{
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <AuthProvider>
-    <RouterProvider router={router}></RouterProvider>
-  </AuthProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
+  </QueryClientProvider>
 )

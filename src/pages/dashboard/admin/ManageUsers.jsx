@@ -2,17 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import ManageUsersRow from './ManageUsersRow';
 import axios from 'axios';
 import { AuthContex } from '../../../providers/AuthProvider';
+import { useQuery } from 'react-query'
 
 const ManageUsers = () => {
     const {user} = useContext(AuthContex)
-    const [ allUsers, setAllUsers ] = useState([])
+   
 
-    useEffect(()=>{
-        axios.get(`/users?email=${user.email}`)
-        .then(response =>setAllUsers(response.data))
-        .catch(error => console.log(error.response))
+    const { isLoading, isError, refetch, data : usersArray = [], error } = useQuery({
+        queryKey : ['user', user?.email],
+        queryFn : async () =>{
+            const response = await axios.get(`/users?email=${user.email}`)
+            return response
+        }
+    })
+    console.log(isError);
 
-    },[])
+
+
 
 
 
@@ -41,7 +47,7 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {/* // table data  */}
-                    {allUsers.map((user, index, arry) =><ManageUsersRow user={user} key={index} index={index}></ManageUsersRow>)}
+                    {usersArray?.data?.map((user, index, arry) =><ManageUsersRow user={user} key={index} index={index} refetch={refetch}></ManageUsersRow>)}
 
                 </tbody>
             </table>

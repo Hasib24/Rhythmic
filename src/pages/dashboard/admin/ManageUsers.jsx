@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ManageUsersRow from './ManageUsersRow';
+import axios from 'axios';
 
 const ManageUsers = () => {
+
+    useEffect(()=>{
+        axios.get('/users')
+        .then(response =>console.log(response.data))
+        .catch(error => console.log(error.response))
+
+    },[])
+
+
+
     return (
         <section className='md:px-5'>
         <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">

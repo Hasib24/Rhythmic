@@ -4,7 +4,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 const ManageUsersRow = () => {
     const [showProceedBtn, setShowProceedBtn] = useState(false)
     return (
-        <tr className=" border-b border-t border-slate-700 hover:bg-base-300 ">
+        <tr className="border-t border-slate-700 hover:bg-base-300 ">
             {/* serial  */}
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowra">
                 ere

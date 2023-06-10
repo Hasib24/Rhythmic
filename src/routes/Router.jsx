@@ -19,6 +19,7 @@ import Enrolledstudents from "../pages/dashboard/instractor/enrolledstudents/Enr
 import AddClass from "../pages/dashboard/instractor/addclass/AddClass";
 import MyClasses from "../pages/dashboard/instractor/myclasses/MyClasses";
 import Feedback from "../pages/dashboard/instractor/feedbackhub/Feedback";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Router = createBrowserRouter([
     {
@@ -49,7 +50,7 @@ const Router = createBrowserRouter([
     },
     {
       path: "dashboard",
-      element: <DashboardLayout></DashboardLayout>,
+      element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
       children: [
         // admin [ For admin only ]
         {

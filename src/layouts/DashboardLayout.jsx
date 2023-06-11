@@ -37,7 +37,7 @@ const DashboardLayout = () => {
                   </>:<></>}
                   
                   {/* Instructor route  */}
-                  {role==='instructor' ? <>
+                  {role==='instractor' ? <>
                     <li><NavLink to='addclass'>Add Class</NavLink></li>
                     <li><NavLink to='myclasses'>My Classes</NavLink></li>
                     <li><NavLink to='enrolledstudents'>Enrolded Students</NavLink></li>

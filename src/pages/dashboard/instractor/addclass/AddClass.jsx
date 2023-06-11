@@ -40,7 +40,7 @@ const AddClass = () => {
                 totalSeat : data.totalSeat,
                 price : data.price
             }
-            axios.post('/addaclass', classData)
+            axios.post(`/addaclass?email=${user.email}`, classData)
             .then(response =>{
 
               if(response.data.acknowledged){

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { useForm } from 'react-hook-form';
 import { AuthContex } from '../../../../providers/AuthProvider';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Ellipsis, Ring } from 'react-awesome-spinners'
 
 const AddClass = () => {
+    const [ loadingRing, setLoadingRing ] = useState(false)
     const navigate = useNavigate()
     const {user} = useContext(AuthContex)
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
@@ -15,6 +17,8 @@ const AddClass = () => {
     console.log(imgHostingUrl);
 
     const onSubmit = data =>{
+
+        setLoadingRing(true)
 
         const formData = new FormData()
         formData.append('image', data.image[0])
@@ -41,6 +45,7 @@ const AddClass = () => {
 
               if(response.data.acknowledged){
                 
+                setLoadingRing(false)
                 //sweet alart 
                 swal({
                   title: "Success !",
@@ -74,6 +79,9 @@ const AddClass = () => {
     return (
         <section className='conatiner '>
             <SectionHeader>Add A Class</SectionHeader>
+            <div className='text-center'>
+              {loadingRing && <Ring></Ring>}
+            </div>
             <form onSubmit={handleSubmit(onSubmit)} className='p-10 border my-auto mx-14'>
                 {/* first row  */}
                 <div className="grid my-4 md:grid-cols-2 md:gap-10">
@@ -101,6 +109,7 @@ const AddClass = () => {
                     <input type="text" name="instractorName" id="instractorName" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value='instractor' disabled />
                     <label htmlFor="instractorName" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" >Instractor Name</label>
                   </div>
+                
                   <div className="relative z-0 w-full mb-6 group">
                     <input type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value="email@gmail.com" disabled  />
                     <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" >Instractor EmaiL</label>
@@ -133,6 +142,7 @@ const AddClass = () => {
                 </div>
 
                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Class</button>
+                
             </form>
 
         </section>

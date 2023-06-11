@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { useForm } from 'react-hook-form';
 import { AuthContex } from '../../../../providers/AuthProvider';
+import axios from 'axios';
 
 const AddClass = () => {
     const {user} = useContext(AuthContex)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const imgUploadAPIKey = import.meta.env.VITE_IMAGE_API_KEY;
-    const imgHostingUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${imgUploadAPIKey}`
+    const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgUploadAPIKey}`
     console.log(imgHostingUrl);
 
     const onSubmit = data =>{
@@ -22,21 +23,23 @@ const AddClass = () => {
         })
         .then(response =>response.json())
         .then(imgResponse =>{
-          console.log(imgResponse.data)
+          if(imgResponse.success){
+
+            const classData ={
+                approveStatus : 'panding',
+                className : data.className,
+                photoUrl : imgResponse.data.display_url,
+                instractorName : user.displayName,
+                email : user.email,
+                totalSeat : data.totalSeat,
+                price : data.price
+            }
+            axios.post('/addaclass', classData)
+            .then(response => console.log(response.data))
+          }
         })
 
 
-        const classData ={
-            approveStatus : 'panding',
-            className : data.className,
-            photoUrl : data.image,
-            instractorName : user.displayName,
-            email : user.email,
-            totalSeat : data.totalSeat,
-            price : data.price
-
-        }
-        console.log(classData);
         
 
     };

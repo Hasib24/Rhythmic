@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MyClassesRow from './MyClassesRow';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import { useContext } from 'react';
+import { AuthContex } from '../../../../providers/AuthProvider';
 
 const MyClasses = () => {
+
+    const {user} = useContext(AuthContex)
+
+    // tenStack query to load my classes 
+    const { isLoading, isError, refetch, data : classesArray = [], error } = useQuery({
+        queryKey : ['myclasses', user?.email],
+        queryFn : async () =>{
+            const response = await axios.get(`/myclasses?email=${user.email}`)
+            return response.data
+        }
+    })
+
+    // console.log(classesArray);
+    
     return (
         <section className='md:px-5'>
             <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -34,15 +52,8 @@ const MyClasses = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        <MyClassesRow></MyClassesRow>
-                        {/* {usersArray?.data?.map((user, index, arry) =><ManageUsersRow user={user} key={index} index={index} refetch={refetch}></ManageUsersRow>)} */}
+                        
+                        {classesArray?.map((aClass, index, arry) =><MyClassesRow aClass={aClass} key={index} index={index} refetch={refetch}></MyClassesRow>)}
 
                     </tbody>
                 </table>

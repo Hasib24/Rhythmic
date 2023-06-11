@@ -1,24 +1,26 @@
 import React from 'react';
 
-const MyClassesRow = () => {
+const MyClassesRow = ({aClass, index}) => {
+
+
     return (
         <tr className="border-t border-slate-700 hover:bg-base-300 ">
             {/* serial  */}
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowra">
-                1
+                {index + 1}
             </th>
             {/* name  */}
             <td className="px-6 py-4">
-                class name
+                {aClass.className}
             </td>
             {/* seats  */}
             <td className="px-6 py-4">
-                400
+                {aClass.totalSeat}
             </td>
             {/* enrolls  */}
             <td className="px-6 py-4">
                 
-                200
+                {aClass.enrolls}
             </td>
             {/* feedback  */}
             <td className="px-6 py-4">
@@ -28,7 +30,7 @@ const MyClassesRow = () => {
             {/* status  */}
             <td className="px-6 py-4">
                 
-                panding
+                {aClass.approveStatus}
             </td>
             {/* action  */}
             <td>

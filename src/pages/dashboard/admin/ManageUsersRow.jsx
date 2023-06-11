@@ -32,7 +32,7 @@ const ManageUsersRow = ({user, index, refetch}) => {
                     email : email,
                     role : roleRef.current.value
                 }
-                axios.post('/usersrole', userData)
+                axios.patch('/usersrole', userData)
                 .then(response =>{
                     if(response.data.modifiedCount){
                         swal("Success! Role is changed !", {
@@ -74,7 +74,7 @@ const ManageUsersRow = ({user, index, refetch}) => {
             <td className="px-6 py-4" colSpan={2}>
                 <select defaultValue={user.role} onChange={(e)=>handleShowProceedBtn(e)} ref={roleRef} className="select select-sm">
                     <option value=''>Student</option>
-                    <option value='instructor'>Instructor</option>
+                    <option value='instractor'>Instructor</option>
                     <option value='admin'>Admin</option>
                 </select>
 

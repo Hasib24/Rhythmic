@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
+import swal from 'sweetalert';
 
 const ManageUsersRow = ({user, index, refetch}) => {
     const roleRef = useRef()
@@ -16,19 +17,43 @@ const ManageUsersRow = ({user, index, refetch}) => {
     }
 
     const handleProceedBtn =(email)=>{
-        
-        const userData ={
-            email : email,
-            role : roleRef.current.value
-        }
-        axios.post('/usersrole', userData)
-        .then(response =>{
-            console.log(response)
-            
-        })
-        .catch(err => console.log(err))
 
-        refetch()
+        swal({
+            title: "Are you sure?",
+            text: "You are going to chang the role!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((proceed) => {
+            if (proceed) {
+
+                const userData ={
+                    email : email,
+                    role : roleRef.current.value
+                }
+                axios.post('/usersrole', userData)
+                .then(response =>{
+                    if(response.data.modifiedCount){
+                        swal("Success! Role is changed !", {
+                          icon: "success",
+                        });
+                        setShowProceedBtn(false)
+
+                    }
+                    
+                    
+                })
+                .catch(err => console.log(err))
+
+            } else {
+              swal("The role is not changed !");
+            }
+          });
+        
+
+
+       
     }
 
     return (

@@ -1,4 +1,7 @@
 import React from 'react';
+import { AiFillAlert } from 'react-icons/ai';
+import { LuLoader } from 'react-icons/lu';
+
 
 const MyClassesRow = ({aClass, index}) => {
 
@@ -24,13 +27,13 @@ const MyClassesRow = ({aClass, index}) => {
             </td>
             {/* feedback  */}
             <td className="px-6 py-4">
+               <span><AiFillAlert className='inline mr-2'></AiFillAlert>no feedback </span> 
                 
-                feedback
             </td>
             {/* status  */}
             <td className="px-6 py-4">
+                <span><LuLoader className='mr-2 inline'></LuLoader>{aClass.approveStatus}</span>
                 
-                {aClass.approveStatus}
             </td>
             {/* action  */}
             <td>

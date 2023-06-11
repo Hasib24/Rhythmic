@@ -3,10 +3,12 @@ import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { useForm } from 'react-hook-form';
 import { AuthContex } from '../../../../providers/AuthProvider';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddClass = () => {
+    const navigate = useNavigate()
     const {user} = useContext(AuthContex)
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
     const imgUploadAPIKey = import.meta.env.VITE_IMAGE_API_KEY;
     const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgUploadAPIKey}`
@@ -35,7 +37,29 @@ const AddClass = () => {
                 price : data.price
             }
             axios.post('/addaclass', classData)
-            .then(response => console.log(response.data))
+            .then(response =>{
+
+              if(response.data.acknowledged){
+                
+                //sweet alart 
+                swal({
+                  title: "Success !",
+                  text: `You successfuly added the class !`,
+                  icon: "success",
+                  buttons:  ["Add more", "See already added classes"],
+                  dangerMode: true,
+                })
+                .then((confirm) => {
+                  if (confirm) {
+                      navigate('/dashboard/myclasses')
+                  } else {
+                    reset()
+                  }
+                });
+
+
+              }
+            })
           }
         })
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 const ManageClasses = () => {
     return (
-        <div>
-            Manage Classes! Admin route
-        </div>
+        <section>
+            manage classes
+        </section>
     );
 };
 

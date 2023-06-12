@@ -1,7 +1,10 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import { AuthContex } from '../../../providers/AuthProvider';
 
 const ManageClassesRow = ({aClass, index, refetch}) => {
+    const {user} = useContext(AuthContex)
+
     const [approveDisable, setApproveDisable] = useState(false)
     const [feedbackDisable, setFeedbackDisable] = useState(false)
     const [denyDisable, setDenyDisable] = useState(false)
@@ -31,6 +34,41 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
       .then(error => console.log(error))
     }
 
+    const handleApproveBtn =()=>{
+
+      const statusData ={
+        id : aClass._id,
+        approveStatus : 'approved'
+      }
+
+      swal({
+        title: "Are you sure?",
+        text: "Once approved, you will not be able to deny this class!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((ok) => {
+        if (ok) {
+          axios.patch(`/statusupdate?email=${user.email}`, statusData)
+          .then(response =>{ 
+            if(response.data.modifiedCount){
+            swal("Poof! You approved the class!", {
+              icon: "success",
+            });
+            refetch()
+          }})
+
+          .catch(error => console.log(error))
+        } else {
+          swal("Your changed your mind!");
+        }
+      });
+
+
+      
+      
+    }
+
 
     return (
         <div className="card grid md:grid-cols-2 border my-5 p-4 bg-base-100 shadow-xl">
@@ -48,15 +86,16 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
                 <h2>Total Seat : {aClass.totalSeat}</h2>
 
               <div>
-                <button className='btn btn-accent btn-outline mx-2'>Approve</button>
+
+
+                <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveBtn()}>Approve</button>
                 {/* Open the modal using ID.showModal() method */}
                 { 
                   !aClass.feedback && <button className="btn btn-info btn-outline disabled:btn-ghost mx-2" disabled={feedbackDisable}  onClick={()=>window[aClass._id].showModal()}>send feedback</button>
-
-                
                 }
-                
                 <button className='btn btn-error btn-outline mx-2'>Deny</button>
+
+
 
                 <dialog id={aClass._id} className="modal modal-bottom sm:modal-middle">
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
 
-const ManageClassesRow = ({aClass, index}) => {
+const ManageClassesRow = ({aClass, index, refetch}) => {
     const [approveDisable, setApproveDisable] = useState(false)
     const [feedbackDisable, setFeedbackDisable] = useState(false)
     const [denyDisable, setDenyDisable] = useState(false)
@@ -22,6 +22,9 @@ const ManageClassesRow = ({aClass, index}) => {
       .then(response =>{
         if(response.data.modifiedCount){
           setFeedbackDisable(true)
+          feedbackRef.current.value = ''
+          refetch()
+          
         }
 
       })
@@ -37,7 +40,7 @@ const ManageClassesRow = ({aClass, index}) => {
             
 
             <div className="card-body">
-                <h2>Current status : <button className='btn btn-xs btn-outline'>{aClass.approveStatus}</button></h2>
+                <h2>Current status : <button className='btn btn-xs btn-outline'>{aClass.approveStatus}</button> { aClass.feedback && <button className='btn btn-xs btn-outline btn-info'>already feedbacked</button> } </h2>
                 <h2>Class name : {aClass.className}</h2>
                 <h2>Instractor name : {aClass.instractorName}</h2>
                 <h2>Instractor email : {aClass.email}</h2>
@@ -47,21 +50,29 @@ const ManageClassesRow = ({aClass, index}) => {
               <div>
                 <button className='btn btn-accent btn-outline mx-2'>Approve</button>
                 {/* Open the modal using ID.showModal() method */}
-                <button className="btn btn-info btn-outline disabled:btn-ghost mx-2" disabled={feedbackDisable}  onClick={()=>window[aClass._id].showModal()}>send feedback</button>
+                { 
+                  !aClass.feedback && <button className="btn btn-info btn-outline disabled:btn-ghost mx-2" disabled={feedbackDisable}  onClick={()=>window[aClass._id].showModal()}>send feedback</button>
+
+                
+                }
                 
                 <button className='btn btn-error btn-outline mx-2'>Deny</button>
 
                 <dialog id={aClass._id} className="modal modal-bottom sm:modal-middle">
 
                   <form method="dialog" className="modal-box">
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     <h3 className="font-bold text-lg">Feedback</h3>
                     <textarea className="p-2 my-4 outline-none border rounded-md w-full" ref={feedbackRef} name="" id="" ></textarea>
                     <div className="modal-action">
                       {/* if there is a button in form, it will close the modal */}
-                      <button className="btn btn-outline">Cancle</button>
+                    {
+                      !feedbackDisable && <button onClick={(e)=>handleFeedbackSend(e, aClass)} className='btn btn-info btn-outline'>Send</button>
+
+                    }
+                      <button className="btn btn-outline">Close</button>
                     </div>
                     
-                  <button onClick={(e)=>handleFeedbackSend(e, aClass)} className='btn btn-info btn-outline'>Send</button>
                   </form>
 
 

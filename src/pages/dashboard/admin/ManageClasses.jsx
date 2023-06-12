@@ -25,7 +25,7 @@ const ManageClasses = () => {
         <section className='px-5'>
             <SectionHeader>Manage Classes</SectionHeader>
             <div>
-                {classesArray?.map((aClass, index)=><ManageClassesRow aClass={aClass} index={index} key={index} ></ManageClassesRow>)}
+                {classesArray?.map((aClass, index)=><ManageClassesRow aClass={aClass} index={index} key={index} refetch={refetch} ></ManageClassesRow>)}
             </div>
         </section>
     );

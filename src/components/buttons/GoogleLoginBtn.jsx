@@ -17,7 +17,7 @@ const GoogleLoginBtn = ({children}) => {
             const userData = {
                 name : result.user.displayName,
                 email : result.user.email,
-                role : ''
+                role : 'student'
             }
             axios.post('/user', userData)
             .then(response =>{

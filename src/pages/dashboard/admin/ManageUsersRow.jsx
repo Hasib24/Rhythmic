@@ -73,7 +73,7 @@ const ManageUsersRow = ({user, index, refetch}) => {
             {/* role  */}
             <td className="px-6 py-4" colSpan={2}>
                 <select defaultValue={user.role} onChange={(e)=>handleShowProceedBtn(e)} ref={roleRef} className="select select-sm">
-                    <option value=''>Student</option>
+                    <option value='student'>Student</option>
                     <option value='instractor'>Instructor</option>
                     <option value='admin'>Admin</option>
                 </select>

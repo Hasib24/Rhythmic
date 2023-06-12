@@ -31,7 +31,7 @@ const DashboardLayout = () => {
                   {/* Sidebar content here */}
                   
                   {/* students route  */}
-                  {role ==='' ? <>
+                  {role ==='student' ? <>
                     <li><NavLink to='myselectedclasses'>My Selecttions</NavLink></li>
                     <li><NavLink to='myenrolledclasses'>My Enrolls</NavLink></li>
                   </>:<></>}

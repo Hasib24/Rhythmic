@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useContext } from 'react';
 import { AuthContex } from '../../../../providers/AuthProvider';
+import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 
 const MyClasses = () => {
 
@@ -22,6 +23,7 @@ const MyClasses = () => {
     
     return (
         <section className='md:px-5'>
+            <SectionHeader>My Classes</SectionHeader>
             <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left bg-base-200">
                     <thead className="text-xs  uppercase ">

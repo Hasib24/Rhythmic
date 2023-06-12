@@ -30,7 +30,7 @@ const Register = () => {
                 const userData ={
                     name : data.name,
                     email : data.email,
-                    role : ''
+                    role : 'student'
                 }
                 axios.post('/user', userData)
                 .then(response => console.log(response))

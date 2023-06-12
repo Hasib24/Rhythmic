@@ -68,7 +68,7 @@ const Header = () => {
 
 
     return (
-        <header className={myScroll ? `z-10 px-5 flex items-center sticky top-0 bg-slate-50 duration-700 shadow-md`: `z-10 px-5 flex sticky top-0 items-center bg-none duration-700`}>
+        <header className={myScroll ? `z-10 px-5 flex items-center sticky top-0 bg-base-300 duration-700 shadow-md`: `z-10 px-5 flex sticky top-0 items-center bg-none duration-700`}>
             <div className=' flex justify-between items-center container mx-auto'>
                 <div className='flex items-center'>
                     <Link to='/'><SiMusicbrainz className='text-3xl'></SiMusicbrainz></Link>
@@ -80,7 +80,7 @@ const Header = () => {
                 <div className='text-3xl p-1 rounded-md md:hidden'>
                     { responsiveMenu ? <MdClose onClick={()=>setResponsiveMenu(!responsiveMenu)}></MdClose> : <GoThreeBars onClick={()=>setResponsiveMenu(!responsiveMenu)}></GoThreeBars> }
                 </div>
-                <nav className={`text-xl flex flex-col justify-between items-center md:block border py-6 ${responsiveMenu ? `absolute right-4 top-20  rounded-md` : `absolute right-2 -top-48`} md:static md:bg-inherit duration-500`}>
+                <nav className={`text-xl flex flex-col justify-between items-center md:block py-6 ${responsiveMenu ? `absolute right-4 top-20  rounded-md` : `absolute right-2 -top-48`} md:static md:bg-inherit duration-500`}>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/'>Home</NavLink>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/instractors'>Instractors</NavLink>
                     <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/classes'>Classes</NavLink>

@@ -81,7 +81,7 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
         <div className="card grid md:grid-cols-2 border my-5 p-4 bg-base-100 shadow-xl">
             
             
-            <img className='rounded-lg' src='https://images.pexels.com/photos/164716/pexels-photo-164716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt="" />
+            <img className='rounded-lg' src={aClass.photoUrl} alt="" />
             
 
             <div className="card-body">

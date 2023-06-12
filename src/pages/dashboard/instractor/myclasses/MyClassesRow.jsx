@@ -3,9 +3,39 @@ import { AiFillAlert } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 import { MdOutlineDoNotDisturb } from 'react-icons/md';
 import { LuLoader } from 'react-icons/lu';
+import { AiOutlineDelete } from 'react-icons/ai';
+import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContex } from '../../../../providers/AuthProvider';
 
 
-const MyClassesRow = ({aClass, index}) => {
+const MyClassesRow = ({aClass, index, refetch}) => {
+    const {user} = useContext(AuthContex)
+
+    const handleDelete =() =>{
+        // console.log(aClass._id);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this class !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                axios.delete(`/deleteclass?email=${user.email}&id=${aClass._id}`)
+                .then(response =>{
+                    if(response.data.deletedCount){
+                        refetch()
+                        swal("Poof! Your class has been deleted!", {
+                            icon: "success",
+                          });
+                    }
+                })
+                .catch(error => console.log(error))
+            }
+          });
+    }
 
 
     return (
@@ -31,7 +61,7 @@ const MyClassesRow = ({aClass, index}) => {
             <td className="px-6 py-4">
                 {
                     aClass.feedback ? <div className='relative'>
-                          <span class="animate-ping absolute inline-flex h-1 w-1 rounded-full bg-green-400 opacity-75"></span>
+                          <span className="animate-ping absolute inline-flex h-1 w-1 rounded-full bg-green-400 opacity-75"></span>
                           <span onClick={()=>window[aClass._id].showModal()} className='cursor-pointer'><AiFillAlert className='inline mr-2 text-green-600'></AiFillAlert>See feedback </span>
                     </div>  : <span><AiFillAlert className='inline mr-2'></AiFillAlert>No feedback </span>  
                 }
@@ -58,7 +88,8 @@ const MyClassesRow = ({aClass, index}) => {
             </td>
             {/* action  */}
             <td>
-                action
+                <button onClick={()=>handleDelete()} className='btn btn-xs normal-case'><AiOutlineDelete className='inline mx-1'></AiOutlineDelete> Delete</button>
+                
             </td>
         </tr>
     );

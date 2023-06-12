@@ -5,9 +5,9 @@ import { AuthContex } from '../../../providers/AuthProvider';
 const ManageClassesRow = ({aClass, index, refetch}) => {
     const {user} = useContext(AuthContex)
 
-    const [approveDisable, setApproveDisable] = useState(false)
+    // const [approveDenyHide, setApproveDenyHide] = useState(false)
     const [feedbackDisable, setFeedbackDisable] = useState(false)
-    const [denyDisable, setDenyDisable] = useState(false)
+    
 
     // console.log(aClass._id);
     const feedbackRef = useRef()
@@ -56,7 +56,9 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
             swal(`Poof! You ${status} the class!`, {
               icon: "success",
             });
+
             refetch()
+           
           }})
 
           .catch(error => console.log(error))
@@ -69,6 +71,8 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
       
       
     }
+
+   
 
 
 
@@ -90,13 +94,18 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
 
               <div>
 
-
-                <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveDenyBtn('approved')}>Approve</button>
-                {/* Open the modal using ID.showModal() method */}
+                {/* Buttons: Approve, Send Feedback, Deny  */}
+                {
+                  aClass.approveStatus==='panding' && <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveDenyBtn('approved')}>Approve</button>
+                }
+                
                 { 
                   !aClass.feedback && <button className="btn btn-info btn-outline disabled:btn-ghost mx-2" disabled={feedbackDisable}  onClick={()=>window[aClass._id].showModal()}>send feedback</button>
                 }
-                <button className='btn btn-error btn-outline mx-2' onClick={()=>handleApproveDenyBtn('denyed')}>Deny</button>
+
+                {
+                  aClass.approveStatus==='panding' && <button className='btn btn-error btn-outline mx-2' onClick={()=>handleApproveDenyBtn('denyed')}>Deny</button>
+                }
 
 
 

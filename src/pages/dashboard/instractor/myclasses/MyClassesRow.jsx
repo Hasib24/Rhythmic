@@ -1,5 +1,7 @@
 import React from 'react';
 import { AiFillAlert } from 'react-icons/ai';
+import { MdDone } from 'react-icons/md';
+import { MdOutlineDoNotDisturb } from 'react-icons/md';
 import { LuLoader } from 'react-icons/lu';
 
 
@@ -32,7 +34,10 @@ const MyClassesRow = ({aClass, index}) => {
             </td>
             {/* status  */}
             <td className="px-6 py-4">
-                <span><LuLoader className='mr-2 inline'></LuLoader>{aClass.approveStatus}</span>
+                {
+                    aClass.approveStatus==='denyed' ? <span> <MdOutlineDoNotDisturb className='mr-2 inline text-red-600'></MdOutlineDoNotDisturb>{aClass.approveStatus} </span> : <span>{aClass.approveStatus==='panding' ? <LuLoader className='mr-2 inline'></LuLoader> : <MdDone className='mr-2 inline text-green-600'></MdDone> }{aClass.approveStatus}</span>
+                }
+                
                 
             </td>
             {/* action  */}

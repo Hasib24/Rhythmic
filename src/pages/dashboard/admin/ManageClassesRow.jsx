@@ -34,16 +34,17 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
       .then(error => console.log(error))
     }
 
-    const handleApproveBtn =()=>{
+    const handleApproveDenyBtn =(status)=>{
 
       const statusData ={
         id : aClass._id,
-        approveStatus : 'approved'
+        approveStatus : status
       }
+      console.log(statusData);
 
       swal({
         title: "Are you sure?",
-        text: "Once approved, you will not be able to deny this class!",
+        text: `Once ${status}, you will not be able to deny this class!`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -52,7 +53,7 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
           axios.patch(`/statusupdate?email=${user.email}`, statusData)
           .then(response =>{ 
             if(response.data.modifiedCount){
-            swal("Poof! You approved the class!", {
+            swal(`Poof! You ${status} the class!`, {
               icon: "success",
             });
             refetch()
@@ -68,6 +69,8 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
       
       
     }
+
+
 
 
     return (
@@ -88,12 +91,12 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
               <div>
 
 
-                <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveBtn()}>Approve</button>
+                <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveDenyBtn('approved')}>Approve</button>
                 {/* Open the modal using ID.showModal() method */}
                 { 
                   !aClass.feedback && <button className="btn btn-info btn-outline disabled:btn-ghost mx-2" disabled={feedbackDisable}  onClick={()=>window[aClass._id].showModal()}>send feedback</button>
                 }
-                <button className='btn btn-error btn-outline mx-2'>Deny</button>
+                <button className='btn btn-error btn-outline mx-2' onClick={()=>handleApproveDenyBtn('denyed')}>Deny</button>
 
 
 

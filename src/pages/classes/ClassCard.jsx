@@ -10,7 +10,7 @@ const ClassCard = ({aClass}) => {
 
   const handleSelect = (aClass) =>{
 
-    console.log(role);
+   
    
     if(!user){
       

@@ -74,7 +74,7 @@ const Router = createBrowserRouter([
           element:<MyClasses></MyClasses>
         },
         {
-          path: "updateclass",
+          path: "updateclass/:id",
           element:<MyClassUpdate></MyClassUpdate>
         },
         {

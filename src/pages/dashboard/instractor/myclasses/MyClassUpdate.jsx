@@ -1,23 +1,40 @@
 import React from 'react';
 import useTitle from '../../../../hooks/useTitle';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContex } from '../../../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { Ring } from 'react-awesome-spinners'
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
-const MyClassUpdate = () => {
-    useTitle('Add class')
+const MyClassUpdate = () =>{
+    
+    useTitle('Update class')
     const [ loadingRing, setLoadingRing ] = useState(false)
-    const navigate = useNavigate()
+    const [aClass, setaClass] = useState([])
     const {user} = useContext(AuthContex)
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
-
+    const params = useParams()
+    const navigate = useNavigate()
+        
     const imgUploadAPIKey = import.meta.env.VITE_IMAGE_API_KEY;
     const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgUploadAPIKey}`
+
+
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+
+    useEffect(()=>{
+        axios.get(`/updateclass?email=${user.email}&id=${params.id}`)
+        .then(response =>setaClass(response.data) )
+        .catch(error => console.log(error))
+
+    }, [])
+
+
+
 
     const onSubmit = data =>{
 
@@ -45,32 +62,34 @@ const MyClassUpdate = () => {
                 feedback : '',
                 price : data.price
             }
-            axios.patch(`/addaclass?email=${user.email}`, classData)
+
+       
+            axios.patch(`/updateclass?email=${user.email}&id=${params.id}`, classData)
             .then(response =>{
 
                 console.log(response.data);
 
-            //   if(response.data.acknowledged){
+              if(response.data.acknowledged){
                 
-            //     setLoadingRing(false)
-            //     //sweet alart 
-            //     swal({
-            //       title: "Success !",
-            //       text: `You successfuly added the class !`,
-            //       icon: "success",
-            //       buttons:  ["Add more", "See already added classes"],
-            //       dangerMode: true,
-            //     })
-            //     .then((confirm) => {
-            //       if (confirm) {
-            //           navigate('/dashboard/myclasses')
-            //       } else {
-            //         reset()
-            //       }
-            //     });
+                setLoadingRing(false)
+                //sweet alart 
+                swal({
+                  title: "Success !",
+                  text: `You successfuly updated the class !`,
+                  icon: "success",
+                  buttons:  ["Add more", "See already added classes"],
+                  dangerMode: true,
+                })
+                .then((confirm) => {
+                  if (confirm) {
+                      navigate('/dashboard/myclasses')
+                  } else {
+                    navigate('/dashboard/addclass')
+                  }
+                });
 
 
-            //   }
+              }
             })
           }
         })
@@ -94,7 +113,7 @@ const MyClassUpdate = () => {
                 <div className="grid my-4 md:grid-cols-2 md:gap-10">
 
                   <div className="relative z-0 w-full mb-6 group">
-                    <input {...register("className", { required: true })} type="text" name="className" id="className" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <input {...register("className", { required: true })} type="text" name="className" defaultValue={aClass.className} id="className" className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                     {errors.className?.type === 'required' && <p className='text-red-600 pl-1'>Class name is required</p>}
 
                     <label htmlFor="className" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" >Class Name</label>
@@ -128,7 +147,7 @@ const MyClassUpdate = () => {
                 <div className="grid my-4 md:grid-cols-2 md:gap-10">
 
                   <div className="relative z-0 w-full mb-6 group">
-                    <input {...register("totalSeat", { required: true, pattern: /^[0-9]+$/ })} type="text" name="totalSeat" id="totalSeat" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <input {...register("totalSeat", { required: true, pattern: /^[0-9]+$/ })} type="text" defaultValue={aClass.totalSeat} name="totalSeat" id="totalSeat" className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                     {errors.totalSeat?.type==="pattern" && <span className='text-red-500 pl-1'>Must be number</span>}
                     {errors.totalSeat?.type === 'required' && <p className='text-red-600 pl-1'>Seat number is required</p>}
 
@@ -138,7 +157,7 @@ const MyClassUpdate = () => {
                   
 
                   <div className="relative z-0 w-full mb-6 group">
-                    <input {...register("price", { required: true, pattern: /^[0-9]+$/ })} type="text" name="price" id="price" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <input {...register("price", { required: true, pattern: /^[0-9]+$/ })} type="text" defaultValue={aClass.price} name="price" id="price" className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                     {errors.price?.type==="pattern" && <span className='text-red-500 pl-1'>Must be number</span>}
                     {errors.price?.type === 'required' && <p className='text-red-600 pl-1'>Price is required</p>}
 

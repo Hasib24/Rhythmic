@@ -41,7 +41,7 @@ const MyClassesRow = ({aClass, index, refetch}) => {
     }
 
     const handleUpdate =()=>{
-        console.log(aClass);
+        // console.log(aClass);
         swal({
             title: "Are you sure?",
             text: "Once you update It need admin approve again",
@@ -51,7 +51,7 @@ const MyClassesRow = ({aClass, index, refetch}) => {
           })
           .then((ok) => {
             if (ok) {
-                navigate('/dashboard/updateclass')
+                navigate(`/dashboard/updateclass/${aClass._id}`)
             }
           });
 

@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const ClassCard = ({aClass}) => {
   const navigate = useNavigate()
 
-  const {user} = useContext(AuthContex)
+  const {user, role} = useContext(AuthContex)
 
   const handleSelect = (aClass) =>{
+
+    console.log(role);
    
     if(!user){
       
@@ -45,7 +47,7 @@ const ClassCard = ({aClass}) => {
             </div>
           </div>
             </div> : <div>
-            <figure><img src={aClass.photoUrl} alt="Shoes" /></figure>
+            <figure><img src={aClass.photoUrl} alt="" /></figure>
             <div className="card-body">
             <h2 className="card-title">{aClass.className}</h2>
             <h2>{aClass.instractorName}</h2>
@@ -53,7 +55,7 @@ const ClassCard = ({aClass}) => {
             <h2>Available Seats : {aClass.totalSeat}</h2>
             <div className="card-actions justify-between">
                 <h2 className='text-2xl font-bold'>{aClass.price}$</h2>
-                <button onClick={()=>handleSelect(aClass)} className="btn btn-info btn-outline" >Select Now</button>
+                <button disabled={role && role!=='student'} onClick={()=>handleSelect(aClass)} className="btn btn-info btn-outline" >Select Now</button>
             </div>
             </div>
             </div>

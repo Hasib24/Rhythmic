@@ -92,7 +92,7 @@ const Header = () => {
                                         <img className='w-10 border-2 border-slate-500 cursor-pointer rounded-full  inline' src={user.photoURL} alt="Photo" onClick={()=>setProfileMenu(!profileMenu)}/>
 
                                     </div>
-                                    <div className={profileMenu ? `absolute top-30 right-0 bg-slate-700 shadow-md p-5 rounded-md`:`absolute -top-60 right-0 bg-slate-100 shadow-md p-5 rounded-md`}>
+                                    <div className={profileMenu ? `absolute top-30 right-0 bg-base-300 shadow-md p-5 rounded-md`:`absolute -top-60 right-0 p-5 rounded-md`}>
                                         <h1>{user.displayName}</h1>
                                         <div>
                                          <label className="inline-flex swap swap-rotate">

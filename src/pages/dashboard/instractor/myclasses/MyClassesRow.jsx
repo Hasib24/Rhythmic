@@ -4,13 +4,16 @@ import { MdDone } from 'react-icons/md';
 import { MdOutlineDoNotDisturb } from 'react-icons/md';
 import { LuLoader } from 'react-icons/lu';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { FiEdit } from 'react-icons/fi';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContex } from '../../../../providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 
 const MyClassesRow = ({aClass, index, refetch}) => {
     const {user} = useContext(AuthContex)
+    const navigate = useNavigate()
 
     const handleDelete =() =>{
         // console.log(aClass._id);
@@ -35,6 +38,24 @@ const MyClassesRow = ({aClass, index, refetch}) => {
                 .catch(error => console.log(error))
             }
           });
+    }
+
+    const handleUpdate =()=>{
+        console.log(aClass);
+        swal({
+            title: "Are you sure?",
+            text: "Once you update It need admin approve again",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((ok) => {
+            if (ok) {
+                navigate('/dashboard/updateclass')
+            }
+          });
+
+
     }
 
 
@@ -88,7 +109,8 @@ const MyClassesRow = ({aClass, index, refetch}) => {
             </td>
             {/* action  */}
             <td>
-                <button onClick={()=>handleDelete()} className='btn btn-xs normal-case'><AiOutlineDelete className='inline mx-1'></AiOutlineDelete> Delete</button>
+                <button onClick={()=>handleUpdate()} ><FiEdit className='inline mx-2 text-base'></FiEdit></button>
+                <button onClick={()=>handleDelete()} ><AiOutlineDelete className='inline mx-2 text-base'></AiOutlineDelete></button>
                 
             </td>
         </tr>

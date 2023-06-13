@@ -21,6 +21,7 @@ import MyClasses from "../pages/dashboard/instractor/myclasses/MyClasses";
 import Feedback from "../pages/dashboard/instractor/feedbackhub/Feedback";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardHome from "../pages/dashboard/general/dashboard/DashboardHome";
+import MyClassUpdate from "../pages/dashboard/instractor/myclasses/MyClassUpdate";
 
 const Router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const Router = createBrowserRouter([
         {
           path: "myclasses",
           element:<MyClasses></MyClasses>
+        },
+        {
+          path: "updateclass",
+          element:<MyClassUpdate></MyClassUpdate>
         },
         {
           path: "enrolledstudents",

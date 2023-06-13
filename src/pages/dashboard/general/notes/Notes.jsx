@@ -1,7 +1,9 @@
 import React from 'react';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
+import useTitle from '../../../../hooks/useTitle';
 
 const Notes = () => {
+    useTitle('Notes')
     return (
         <section>
             <SectionHeader>Notes</SectionHeader>

@@ -1,8 +1,10 @@
 import React from 'react';
 import SectionHeader from '../../components/sectionHeader/SectionHeader';
 import InstructorCard from './InstructorCard';
+import useTitle from '../../hooks/useTitle';
 
 const Instructors = () => {
+    useTitle('Instractor')
     return (
         <section className='container mx-auto px-5 md:px-0'>
             <SectionHeader>Our Instractors</SectionHeader>

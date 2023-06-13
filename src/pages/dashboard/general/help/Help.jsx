@@ -3,8 +3,10 @@ import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { BiSupport } from 'react-icons/bi';
 import { MdAddCall } from 'react-icons/md';
 import { TfiEmail } from 'react-icons/tfi';
+import useTitle from '../../../../hooks/useTitle';
 
 const Help = () => {
+    useTitle('Help')
     return (
         <section>
             <SectionHeader>Help Desk</SectionHeader>

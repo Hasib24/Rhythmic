@@ -5,8 +5,10 @@ import { useQuery } from 'react-query';
 import { useContext } from 'react';
 import { AuthContex } from '../../../../providers/AuthProvider';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
+import useTitle from '../../../../hooks/useTitle';
 
 const MyClasses = () => {
+    useTitle('My classes')
 
     const {user} = useContext(AuthContex)
 

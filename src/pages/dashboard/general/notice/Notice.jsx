@@ -1,8 +1,10 @@
 import React from 'react';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import Marquee from "react-fast-marquee";
+import useTitle from '../../../../hooks/useTitle';
 
 const Notice = () => {
+    useTitle('Notice')
     return (
         <section>
             <SectionHeader>Notice Board</SectionHeader>

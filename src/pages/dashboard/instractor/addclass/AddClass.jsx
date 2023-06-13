@@ -5,8 +5,10 @@ import { AuthContex } from '../../../../providers/AuthProvider';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Ellipsis, Ring } from 'react-awesome-spinners'
+import useTitle from '../../../../hooks/useTitle';
 
 const AddClass = () => {
+    useTitle('Add class')
     const [ loadingRing, setLoadingRing ] = useState(false)
     const navigate = useNavigate()
     const {user} = useContext(AuthContex)

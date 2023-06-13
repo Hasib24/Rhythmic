@@ -3,8 +3,10 @@ import SectionHeader from '../../components/sectionHeader/SectionHeader';
 import ClassCard from './ClassCard';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import useTitle from '../../hooks/useTitle';
 
 const Classes = () => {
+    useTitle('Classes')
 
     // tenStack query to load all classes 
     const { isLoading, isError, refetch, data : classesArray = [], error } = useQuery({

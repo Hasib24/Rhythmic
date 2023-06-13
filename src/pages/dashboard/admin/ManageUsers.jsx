@@ -3,8 +3,10 @@ import ManageUsersRow from './ManageUsersRow';
 import axios from 'axios';
 import { AuthContex } from '../../../providers/AuthProvider';
 import { useQuery } from 'react-query'
+import useTitle from '../../../hooks/useTitle';
 
 const ManageUsers = () => {
+    useTitle('Manage users')
     const {user} = useContext(AuthContex)
    
 

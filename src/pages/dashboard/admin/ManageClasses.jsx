@@ -5,8 +5,10 @@ import { useContext } from 'react';
 import { AuthContex } from '../../../providers/AuthProvider';
 import axios from 'axios';
 import ManageClassesRow from './ManageClassesRow';
+import useTitle from '../../../hooks/useTitle';
 
 const ManageClasses = () => {
+    useTitle('Manage classes')
     const {user} = useContext(AuthContex)
 
 

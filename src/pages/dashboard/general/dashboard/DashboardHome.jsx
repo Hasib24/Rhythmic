@@ -2,9 +2,11 @@ import React from 'react';
 import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { useContext } from 'react';
 import { AuthContex } from '../../../../providers/AuthProvider';
+import useTitle from '../../../../hooks/useTitle';
 
 const DashboardHome = () => {
     const {user} = useContext(AuthContex)
+    useTitle('Dashboard Home')
     return (
         <section>
             <SectionHeader>Welcome to Dashboard</SectionHeader>

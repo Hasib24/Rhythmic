@@ -6,8 +6,8 @@ const Footer = () => {
               <div className="grid grid-flow-col gap-4">
                 <a className="link link-hover">About us</a> 
                 <a className="link link-hover">Contact</a> 
-                <a className="link link-hover">Jobs</a> 
-                <a className="link link-hover">Press kit</a>
+                <a className="link link-hover">Career</a> 
+                <a className="link link-hover">Instractors</a>
               </div> 
               <div>
                 <div className="grid grid-flow-col gap-4">
@@ -17,7 +17,7 @@ const Footer = () => {
                 </div>
               </div> 
               <div>
-                <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+                <p>Copyright © 2023 - All right reserved by Rhydmic.com</p>
               </div>
             </footer>
     );

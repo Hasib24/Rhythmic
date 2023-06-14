@@ -3,7 +3,7 @@ import React from 'react';
 const InstructorCard = () => {
     return (
         <>
-            <div className="grid md:grid-cols-2 rounded-lg bg-slate-800 shadow-xl">
+            <div className="grid md:grid-cols-2 rounded-lg bg-base-300 shadow-xl">
                 <figure><img className='rounded-t-lg md:rounded-l-lg' src="https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Movie"/></figure>
                 <div className="p-5">
                   <h2 className="text-2xl">Instructor Name</h2>

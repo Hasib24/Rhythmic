@@ -3,6 +3,7 @@ import Slider from '../slider/Slider';
 import PopularClasses from '../popular/PopularClasses';
 import PopularInstrument from '../popular/PopularInstrument';
 import useTitle from '../../hooks/useTitle';
+import ConnectedBands from './ConnectedBands';
 
 const Home = () => {
     useTitle('Home')
@@ -12,6 +13,7 @@ const Home = () => {
             <Slider></Slider>
             <PopularClasses></PopularClasses>
             <PopularInstrument></PopularInstrument>
+            <ConnectedBands></ConnectedBands>
         </section>
     );
 };

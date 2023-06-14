@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
 import useTokenGen from '../../hooks/useTokenGen';
+import { useNavigate } from 'react-router-dom';
 
 const GoogleLoginBtn = ({children}) => {
+    const navigate = useNavigate()
 
     const { user, setUser, role, setRole, googleSignIn } = useContext(AuthContex)
 
@@ -21,8 +23,9 @@ const GoogleLoginBtn = ({children}) => {
             }
             axios.post('/user', userData)
             .then(response =>{
-                console.log(response)
+                
                 setRole(response.data.role)
+                navigate('/')
 
             })
             .catch(err => console.log(err))

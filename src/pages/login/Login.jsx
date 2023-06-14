@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContex } from '../../providers/AuthProvider';
@@ -11,7 +11,7 @@ import axios from 'axios';
 
 
 const Login = () => {
-  
+    const navigate = useNavigate()
     const { user, setUser, setRole, signInUser } = useContext(AuthContex)
 
         
@@ -26,7 +26,10 @@ const Login = () => {
         .then(res =>{
             setUser(res.user)
             axios.get(`/user?email=${res.user.email}`)
-            .then(response =>setRole(response.data.role))
+            .then(response =>{
+                setRole(response.data.role)
+                navigate('/')
+            })
             .catch(error => console.log(error))
         })
         .catch(error =>console.log(error))

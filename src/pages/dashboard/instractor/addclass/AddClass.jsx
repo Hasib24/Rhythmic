@@ -86,7 +86,7 @@ const AddClass = () => {
             <div className='text-center'>
               {loadingRing && <Ring></Ring>}
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className='p-10 border my-auto mx-14'>
+            <form onSubmit={handleSubmit(onSubmit)} className='p-10 my-auto mx-14'>
                 {/* first row  */}
                 <div className="grid my-4 md:grid-cols-2 md:gap-10">
 

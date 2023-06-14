@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import axios from 'axios';
 import useTokenGen from '../../hooks/useTokenGen';
 
 const Register = () => {
+    const navigate = useNavigate()
 
     const [show, setShow] = useState(null);
     const {user, setUser, setRole, createUser, updateUser } = useContext(AuthContex)
@@ -41,7 +42,10 @@ const Register = () => {
             res.user.displayName = data.name;
             res.user.photoURL = data.photourl;
             setUser(res.user)
-            setRole('')
+            setRole('student')
+            navigate('/')
+            
+            
         })
     }
 

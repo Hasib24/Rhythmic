@@ -3,18 +3,25 @@ import { AuthContex } from '../../providers/AuthProvider';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 const ClassCard = ({aClass}) => {
   const navigate = useNavigate()
 
   const {user, role} = useContext(AuthContex)
 
-  let selectedClasses = []
+  const { isLoading, isError, refetch, data : selectedClasses = [], error } = useQuery({
+    queryKey : ['user'],
+    queryFn : async () =>{
+        const response = await axios.get(`/user?email=${user.email}`)
+        return response.data.selectedSlass
+    }
+  })
+
+
 
   const handleSelect = (aClass) =>{
 
-   
-   
     if(!user){
       
       swal({
@@ -28,10 +35,34 @@ const ClassCard = ({aClass}) => {
         ok && navigate('/login')
       })
     }else{
-      selectedClasses= [...selectedClasses, aClass]
-      axios.patch(`/user?email=${user.email}`, selectedClasses)
-      .then(response => console.log(response))
-      .catch(error =>console.log(error))
+
+      const isSelected = selectedClasses.find(selectedClass =>selectedClass._id===aClass._id)
+      if(isSelected){
+        swal({
+          title: "Already selected!",
+          text: "This class is already selectd, want to see list ?",
+          icon: "warning",
+          buttons: ["Cancle", "See list"]
+          
+          
+        })
+
+      }else{
+
+
+        
+              selectedClasses.push(aClass)
+              // axios.patch(`/user?email=${user.email}`, selectedClasses)
+              // .then(response => console.log(response))
+              // .catch(error =>console.log(error))
+
+              console.log(selectedClasses);
+
+      }
+      
+
+      
+
     }
 
 

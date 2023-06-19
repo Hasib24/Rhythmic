@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import { AuthContex } from '../../providers/AuthProvider';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ClassCard = ({aClass}) => {
   const navigate = useNavigate()
 
   const {user, role} = useContext(AuthContex)
+
+  let selectedClasses = []
 
   const handleSelect = (aClass) =>{
 
@@ -25,8 +28,18 @@ const ClassCard = ({aClass}) => {
         ok && navigate('/login')
       })
     }else{
-      console.log(`Select button clicked`);
+      selectedClasses= [...selectedClasses, aClass]
+      axios.patch(`/user?email=${user.email}`, selectedClasses)
+      .then(response => console.log(response))
+      .catch(error =>console.log(error))
     }
+
+
+
+    
+    console.log(selectedClasses);
+    
+
 
 
 

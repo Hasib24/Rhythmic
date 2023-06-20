@@ -13,7 +13,7 @@ const ClassCard = ({aClass}) => {
   const { isLoading, isError, refetch, data : selectedClasses = [], error } = useQuery({
     queryKey : ['user'],
     queryFn : async () =>{
-        const response = await axios.get(`/user?email=${user.email}`)
+        const response = await axios.get(`/user?email=${user?.email}`)
         return response.data.selectedSlass
     }
   })
@@ -48,27 +48,20 @@ const ClassCard = ({aClass}) => {
         })
 
       }else{
-
-
         
-              selectedClasses.push(aClass)
-              // axios.patch(`/user?email=${user.email}`, selectedClasses)
-              // .then(response => console.log(response))
-              // .catch(error =>console.log(error))
-
-              console.log(selectedClasses);
+        selectedClasses.push(aClass)
+        axios.patch(`/user?email=${user.email}`, selectedClasses)
+        .then(response => console.log(response))
+        .catch(error =>console.log(error))
+        
 
       }
-      
-
-      
 
     }
 
 
 
     
-    console.log(selectedClasses);
     
 
 

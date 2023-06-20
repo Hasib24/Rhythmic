@@ -46,6 +46,10 @@ const ClassCard = ({aClass}) => {
           
           
         })
+        .then((ok) => {
+          ok && navigate('/dashboard/myselectedclasses')
+        })
+        
 
       }else{
         

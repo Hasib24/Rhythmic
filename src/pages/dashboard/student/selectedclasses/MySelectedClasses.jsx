@@ -19,7 +19,7 @@ const MySelectedClasses = () => {
             <SectionHeader>My Selections</SectionHeader>
             <div className='grid md:grid-cols-2 gap-3'>
                 {
-                    mySelectedClses.map(selectedClass =><MySelectedClassesCard selectedClass={selectedClass}></MySelectedClassesCard>)
+                    mySelectedClses.map(selectedClass =><MySelectedClassesCard selectedClass={selectedClass} key={selectedClass._id}></MySelectedClassesCard>)
                 }
             </div>
         </section>

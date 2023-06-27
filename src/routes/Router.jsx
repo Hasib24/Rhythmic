@@ -22,6 +22,7 @@ import Feedback from "../pages/dashboard/instractor/feedbackhub/Feedback";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardHome from "../pages/dashboard/general/dashboard/DashboardHome";
 import MyClassUpdate from "../pages/dashboard/instractor/myclasses/MyClassUpdate";
+import Payment from "../pages/dashboard/student/payment/Payment";
 
 const Router = createBrowserRouter([
     {
@@ -94,6 +95,10 @@ const Router = createBrowserRouter([
         {
           path: "myselectedclasses",
           element:<MySelectedClasses></MySelectedClasses>
+        },
+        {
+          path: "payment",
+          element:<Payment></Payment>
         },
         {
           path: "myenrolledclasses",

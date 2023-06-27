@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MySelectedClassesCard = ({selectedClass}) => {
+    const navigate = useNavigate()
     const selectedPay = () =>{
         console.log(`pay btn clicked`);
+        navigate('/dashboard/payment')
     }
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">

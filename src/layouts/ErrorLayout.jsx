@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
 import useTitle from '../hooks/useTitle';
 
-
-
 const ErrorLayout = () => {
     useTitle("404 Error")
     return (

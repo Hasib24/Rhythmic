@@ -14,9 +14,6 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [ loader, setLoader ] = useState(true)
-    const [ role, setRole ] = useState(null)
-
-    console.log(role);
     
     const createUser = (email, pass) =>{
         return createUserWithEmailAndPassword(auth, email, pass)
@@ -47,7 +44,7 @@ const AuthProvider = ({ children }) => {
             // check user role 
             axios.get(`/user?email=${currentUser.email}`)
             .then(response =>{
-                setRole(response.data.role)
+                setUser(response.data.role)
                 setLoader(null)
                 
             })
@@ -64,8 +61,6 @@ const AuthProvider = ({ children }) => {
         setUser,
         loader,
         setLoader,
-        role,
-        setRole,
         createUser,
         updateUser,
         signInUser,

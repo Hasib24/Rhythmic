@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const GoogleLoginBtn = ({children}) => {
     const navigate = useNavigate()
 
-    const { user, setUser, role, setRole, googleSignIn } = useContext(AuthContex)
+    const { user, setUser, googleSignIn } = useContext(AuthContex)
 
     // Getting JWT Token 
     useTokenGen(user?.email)
@@ -16,23 +16,20 @@ const GoogleLoginBtn = ({children}) => {
     const handleClick = () =>{
         googleSignIn()
         .then(result =>{
-            const userData = {
-                name : result.user.displayName,
-                email : result.user.email,
-                role : 'student'
-            }
-            axios.post('/user', userData)
-            .then(response =>{
-                
-                setRole(response.data.role)
-                navigate('/')
 
+            console.log(result);
+            const userData = {
+                userName : result.user.displayName,
+                userEmail : result.user.email,
+                profileImageURL : result.user.photoURL
+            }
+
+            axios.post('/user/signup', userData)
+            .then(response =>{
+                setUser(response.data[0])
+                navigate('/')
             })
             .catch(err => console.log(err))
-
-            setUser(result.user)
-
-
         })
         .catch(err=> console.log(err))
         

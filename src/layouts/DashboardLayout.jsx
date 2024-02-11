@@ -15,7 +15,7 @@ import { AuthContex } from '../providers/AuthProvider';
 
 const DashboardLayout = () => {
 
-    const { user, role } = useContext(AuthContex);
+    const { user } = useContext(AuthContex);
 
     return (
         <section>
@@ -36,13 +36,13 @@ const DashboardLayout = () => {
                   {/* Sidebar content here */}
                   
                   {/* students route  */}
-                  {role ==='student' ? <>
+                  {user.role ==='Student' ? <>
                     <li><NavLink to='myselectedclasses'><BiSelectMultiple className='text-xl'></BiSelectMultiple>  My Selecttions</NavLink></li>
                     <li><NavLink to='myenrolledclasses'><MdOutlineControlPointDuplicate className='text-xl'></MdOutlineControlPointDuplicate> My Enrolls</NavLink></li>
                   </>:<></>}
                   
                   {/* Instructor route  */}
-                  {role==='instractor' ? <>
+                  {user.role ==='Instractor' ? <>
                     <li><NavLink to='addclass'><MdOutlineControlPointDuplicate className='text-xl'></MdOutlineControlPointDuplicate> Add Class</NavLink></li>
                     <li><NavLink to='myclasses'><BsPersonCheck className='text-xl'></BsPersonCheck> My Classes</NavLink></li>
                     <li><NavLink to='enrolledstudents'><MdPeopleOutline className='text-xl'></MdPeopleOutline> Enrolded Students</NavLink></li>
@@ -51,7 +51,7 @@ const DashboardLayout = () => {
                   </>: <></>}
 
                   {/* Admin route */}
-                  { role ==='admin' ? <>
+                  { user.role ==='Admin' ? <>
                   <li><NavLink to='manageclasses'><BiBook className='text-xl'></BiBook> Manage Classes</NavLink></li>
                   <li><NavLink to='manageusers'><MdManageAccounts className='text-xl'></MdManageAccounts> Mamage Users</NavLink></li>
                   </> : <></>}

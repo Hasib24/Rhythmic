@@ -42,9 +42,9 @@ const AuthProvider = ({ children }) => {
             setLoader(null)
             
             // check user role 
-            axios.get(`/user?email=${currentUser.email}`)
+            axios.get(`user/check?email=${currentUser.email}`)
             .then(response =>{
-                setUser(response.data.role)
+                setUser(response.data)
                 setLoader(null)
                 
             })
@@ -54,6 +54,9 @@ const AuthProvider = ({ children }) => {
         //stop observing after unmount
         return unsubscribe()
     },[])
+
+    // axios.get('/cookie').then(response =>console.log(response))
+    // axios.get('/cookie-check').then(response =>console.log(response))
 
 
     const contextData ={

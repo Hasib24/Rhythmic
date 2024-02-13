@@ -12,9 +12,6 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 // Create a client
 const queryClient = new QueryClient()
 
-
-
-// axios.defaults.baseURL = 'https://assignment-12-server-eight-roan.vercel.app';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.interceptors.request.use((request)=>{
   request.headers.authorizatn = `bearer ${JSON.parse(localStorage.getItem('jwtAccessToken'))}`

@@ -23,111 +23,116 @@ import PrivateRoutes from "./PrivateRoutes";
 import DashboardHome from "../pages/dashboard/general/dashboard/DashboardHome";
 import MyClassUpdate from "../pages/dashboard/instractor/myclasses/MyClassUpdate";
 import Payment from "../pages/dashboard/student/payment/Payment";
+import Loginas from "../pages/loginas/Loginas";
 
 const Router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout></MainLayout>,
-      children:[
-        {
-          path : "/",
-          element: <Home></Home>
-        },
-        {
-          path : "/instractors",
-          element: <Instructors></Instructors>
-        },
-        {
-          path : "/classes",
-          element: <Classes></Classes>
-        },
-        {
-          path : "/login",
-          element: <Login></Login>
-        },
-        {
-          path : "/register",
-          element: <Register></Register>
-        }
-      ]
-    },
-    {
-      path: "dashboard",
-      element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
-      children: [
-        // admin [ For admin only ]
-        {
-          path: "manageclasses",
-          element:<ManageClasses></ManageClasses>
-        },
-        {
-          path: "manageusers",
-          element:<ManageUsers></ManageUsers>
-        },
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>
+      },
+      {
+        path: "/instractors",
+        element: <Instructors></Instructors>
+      },
+      {
+        path: "/classes",
+        element: <Classes></Classes>
+      }
+    ]
+  },
+  {
+    path: "dashboard",
+    element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+    children: [
+      // admin [ For admin only ]
+      {
+        path: "manageclasses",
+        element: <ManageClasses></ManageClasses>
+      },
+      {
+        path: "manageusers",
+        element: <ManageUsers></ManageUsers>
+      },
 
-        // instructor [ For instructors only ]
-        {
-          path: "addclass",
-          element:<AddClass></AddClass>
-        },
-        {
-          path: "myclasses",
-          element:<MyClasses></MyClasses>
-        },
-        {
-          path: "updateclass/:id",
-          element:<MyClassUpdate></MyClassUpdate>
-        },
-        {
-          path: "enrolledstudents",
-          element:<Enrolledstudents></Enrolledstudents>
-        },
-        {
-          path: "Feedback",
-          element:<Feedback></Feedback>
-        },
-        {
-          path: "enrolledstudents",
-          element:<Enrolledstudents></Enrolledstudents>
-        },
+      // instructor [ For instructors only ]
+      {
+        path: "addclass",
+        element: <AddClass></AddClass>
+      },
+      {
+        path: "myclasses",
+        element: <MyClasses></MyClasses>
+      },
+      {
+        path: "updateclass/:id",
+        element: <MyClassUpdate></MyClassUpdate>
+      },
+      {
+        path: "enrolledstudents",
+        element: <Enrolledstudents></Enrolledstudents>
+      },
+      {
+        path: "Feedback",
+        element: <Feedback></Feedback>
+      },
+      {
+        path: "enrolledstudents",
+        element: <Enrolledstudents></Enrolledstudents>
+      },
 
-        // students [ For every one except instructor and admin ]
-        {
-          path: "myselectedclasses",
-          element:<MySelectedClasses></MySelectedClasses>
-        },
-        {
-          path: "payment",
-          element:<Payment></Payment>
-        },
-        {
-          path: "myenrolledclasses",
-          element:<MyEnrolledClasses></MyEnrolledClasses>
-        },
+      // students [ For every one except instructor and admin ]
+      {
+        path: "myselectedclasses",
+        element: <MySelectedClasses></MySelectedClasses>
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>
+      },
+      {
+        path: "myenrolledclasses",
+        element: <MyEnrolledClasses></MyEnrolledClasses>
+      },
 
-        // general [ For every one ]
-        {
-          path: "dashboard",
-          element: <DashboardHome></DashboardHome>
-        },
-        {
-          path: "notes",
-          element:<Notes></Notes>
-        },
-        {
-          path: "notice",
-          element:<Notice></Notice>
-        },
-        {
-          path: "help",
-          element:<Help></Help>
-        }
-      ]
-    },
-    {
-      path: "*",
-      element: <ErrorLayout></ErrorLayout>
-    }
-  ]);
+      // general [ For every one ]
+      {
+        path: "dashboard",
+        element: <DashboardHome></DashboardHome>
+      },
+      {
+        path: "notes",
+        element: <Notes></Notes>
+      },
+      {
+        path: "notice",
+        element: <Notice></Notice>
+      },
+      {
+        path: "help",
+        element: <Help></Help>
+      }
+    ]
+  },
+  {
+    path: "/register",
+    element: <Register></Register>
+  },
+  {
+    path: "loginas",
+    element: <Loginas></Loginas>,
+  },
+  {
+    path: "login",
+    element: <Login></Login>
+  },
+  {
+    path: "*",
+    element: <ErrorLayout></ErrorLayout>
+  }
+]);
 
 export default Router;

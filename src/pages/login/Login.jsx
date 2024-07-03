@@ -35,13 +35,7 @@ const Login = () => {
         .catch(error =>console.log(error))
     }
 
- 
 
-
-
-   
-
-        
 
     return (
         <div className='p-8 my-10 max-w-md mx-auto justify-center border rounded-md shadow-lg'>

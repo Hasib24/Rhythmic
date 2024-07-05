@@ -64,7 +64,7 @@ const Register = () => {
                     <input {...register("email", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type="email" name="email" id="email" placeholder='Enter email' /> <br />
                     {errors.email?.type === 'required' && <p className='text-red-600 -mt-3 pl-1'>Your email is required</p>}
 
-                    <input {...register("password", { required: true, minLength: 6, maxLength: 8, pattern: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].)(?=.*[a-z])/ })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type={show ? 'password' : 'text'} name="password" id="password" placeholder='Password' /> <br />
+                    <input {...register("password", { required: true, minLength: 6, maxLength: 16, pattern: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].)(?=.*[a-z])/ })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type={show ? 'password' : 'text'} name="password" id="password" placeholder='Password' /> <br />
                     {errors.password?.type === "required" && <span className='text-red-500 -mt-3 pl-1'>Password is required</span>}
                     {errors.password?.type === "maxLength" && <span className='text-red-500 -mt-3 pl-1'>Maximum 8 cherecter</span>}
                     {errors.password?.type === "minLength" && <span className='text-red-500 -mt-3 pl-1'>Minimum 6 cherecter</span>}
@@ -73,8 +73,8 @@ const Register = () => {
                     <p onClick={() => { setShow(!show) }}>{show ? <span>Show password</span> : <span>Hide password</span>}</p>
                     <input {...register("cpassword", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type={show ? 'password' : 'text'} name="cpassword" id="cpassword" placeholder='Confirm password' /> <br />
 
-                    <input {...register("photourl", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type="url" name="photourl" id="photourl" placeholder='Photo url' />
-                    {errors.photourl?.type === 'required' && <p className='text-red-600 -mt-3 pl-1'>Photo url is required</p>}
+                    {/* <input {...register("photourl", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type="url" name="photourl" id="photourl" placeholder='Photo url' />
+                    {errors.photourl?.type === 'required' && <p className='text-red-600 -mt-3 pl-1'>Photo url is required</p>} */}
 
                     <input disabled={watch('password') != watch('cpassword')} className=' border duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-red-600 ' type="submit" name="submit" value="Register" />
 

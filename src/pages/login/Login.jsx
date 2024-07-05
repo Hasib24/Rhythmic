@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { FcGoogle } from 'react-icons/fc';
@@ -7,8 +7,6 @@ import { AuthContex } from '../../providers/AuthProvider';
 import { useForm } from "react-hook-form";
 import useTokenGen from '../../hooks/useTokenGen';
 import axios from 'axios';
-import { SiMusicbrainz } from 'react-icons/si';
-
 
 
 const Login = () => {
@@ -19,8 +17,23 @@ const Login = () => {
     // Getting JWT Token 
     useTokenGen(user?.email)
 
+    //For Visitor as Admin
+    const handleAdminVisitor =()=>{
+        if(localStorage.getItem("User role") =="Admin"){
+            setValue('email', 'admin_visitor@gmail.com');
+            setValue('password', 'admin1@#A')
+        }else if(localStorage.getItem("User role") =="Instractor"){
+            setValue('email', 'instractor_visitor@gmail.com');
+            setValue('password', 'instractor1@#A')
+        }
+    } 
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    useEffect(()=>{
+        handleAdminVisitor()
+    }, [])
+
+
+    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm();
     const onSubmit = data => {
         // console.log(data);
         signInUser(data.email, data.password)
@@ -47,7 +60,7 @@ const Login = () => {
 
                     <input className='border duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-slate-200' type="submit" name="submit" id="submit" value="Login" />
 
-                    <p>Do not have a account ? <Link to='/register' className='text-green-400 underline'>Registeration</Link></p>
+                    <p>Don't have an account ? <Link to='/register' className='text-green-400 underline'>Registeration</Link></p>
 
 
                 </form>

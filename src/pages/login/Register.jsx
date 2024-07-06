@@ -20,6 +20,7 @@ const Register = () => {
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     const onSubmit = data => {
 
         createUser(data.email, data.password)
@@ -29,18 +30,19 @@ const Register = () => {
                         //profile updated
                         //send user data to DB for each successful regestatison
                         const userData = {
-                            name: data.name,
-                            email: data.email,
-                            role: 'student'
+                            userName: data.name,
+                            userEmail: data.email,
+                            password: data.password
                         }
-                        axios.post('/user', userData)
+                        console.log(userData);
+                        axios.post('/user/signup', userData)
                             .then(response => console.log(response))
                             .catch(err => console.log(err))
                     })
                     .catch((err) => console.log(err))
 
                 res.user.displayName = data.name;
-                res.user.photoURL = data.photourl;
+                // res.user.photoURL = data.photourl;
                 setUser(res.user)
                 setRole('student')
                 navigate('/')

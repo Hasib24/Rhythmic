@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import { SiMusicbrainz } from 'react-icons/si';
+import { IoPersonCircleOutline } from "react-icons/io5";
 import { GoThreeBars } from 'react-icons/go';
 import { AuthContex } from '../../providers/AuthProvider';
 
@@ -82,8 +83,8 @@ const Header = () => {
                             <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500' to='/dashboard/dashboard'>Dashboard</NavLink>
 
                             <div className='inline'>
-                                <img className='w-10 border-2 border-slate-500 cursor-pointer rounded-full  inline' src={user.profileImageURL} alt="Photo" onClick={() => setProfileMenu(!profileMenu)} />
-
+                                {/* <img className='w-10 border-2 border-slate-500 cursor-pointer rounded-full  inline' src={user.profileImageURL} alt="Photo" onClick={() => setProfileMenu(!profileMenu)} /> */}
+                                <IoPersonCircleOutline className='cursor-pointer rounded-full  inline text-3xl border' onClick={() => setProfileMenu(!profileMenu)} />
                             </div>
                             <div className={profileMenu ? `absolute top-30 right-0 bg-base-300 shadow-md p-5 rounded-md border-2 border-slate-400 w-[200px]` : `absolute -top-60 right-0 p-5 rounded-md`}>
                                 <h1>{user.userName}</h1>

@@ -42,9 +42,9 @@ const AuthProvider = ({ children }) => {
             setLoader(null)
             
             // check user role 
-            axios.get(`user/check?email=${currentUser.email}`)
+            axios.get(`user/check?userEmail=${currentUser.email}`)
             .then(response =>{
-                setUser(response.data)
+                setUser(response.data[0])
                 setLoader(null)
                 
             })

@@ -17,11 +17,10 @@ const GoogleLoginBtn = ({ children }) => {
         googleSignIn()
             .then(result => {
 
-                console.log(result);
                 const userData = {
                     userName: result.user.displayName,
                     userEmail: result.user.email,
-                    profileImageURL: result.user.photoURL
+                    // profileImageURL: result.user.photoURL
                 }
 
                 axios.post('/user/signup', userData)

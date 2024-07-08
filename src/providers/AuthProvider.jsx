@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
             axios.get(`user/check?userEmail=${currentUser.email}`)
             .then(response =>{
                 setUser(response.data[0])
+                console.log(response.data[0])
                 setLoader(null)
                 
             })

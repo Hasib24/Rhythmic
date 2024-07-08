@@ -41,9 +41,10 @@ const Login = () => {
                 
                 axios.get(`/user/check?userEmail=${res.user?.email}`)
                     .then(response => {
-                        console.log(response)
-                        // setUser(res.user)
-                       
+                        localStorage.setItem('jwtAccessToken', response.headers.authorization)
+                        setUser(response)
+                        
+                        
                     })
                     .catch(error => console.log(error))
             })

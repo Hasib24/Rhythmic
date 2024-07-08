@@ -8,19 +8,18 @@ import useTitle from '../../../hooks/useTitle';
 const ManageUsers = () => {
     useTitle('Manage users')
     const {user} = useContext(AuthContex)
+
+    console.log(user);
    
 
     const { isLoading, isError, refetch, data : usersArray = [], error } = useQuery({
-        queryKey : ['user', user?.email],
+        queryKey : ['userEmail', user?.userEmail],
         queryFn : async () =>{
-            const response = await axios.get(`/users?email=${user.email}`)
+            const response = await axios.get(`/user/list?email=${user.userEmail}`)
             return response
         }
     })
     // console.log(isError);
-
-
-
 
 
 

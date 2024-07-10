@@ -13,54 +13,58 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    const [ loader, setLoader ] = useState(true)
-    
-    const createUser = (email, pass) =>{
+    const [loader, setLoader] = useState(true)
+
+    const createUser = (email, pass) => {
         return createUserWithEmailAndPassword(auth, email, pass)
     }
 
-    const updateUser = (name, photoURL) =>{
+    const updateUser = (name, photoURL) => {
         return updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
     }
 
-    const signInUser = (email, pass) =>{
+    const signInUser = (email, pass) => {
         return signInWithEmailAndPassword(auth, email, pass)
     }
 
-    const googleSignIn = () =>{
+    const googleSignIn = () => {
         return signInWithPopup(auth, gglProvider)
     }
 
-    const logOut = () =>{
+    const logOut = () => {
+        localStorage.removeItem('jwtAccessToken')
+        localStorage.removeItem('User role')
+
         return signOut(auth)
     }
 
 
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoader(null)
-            
-            // check user role 
-            axios.get(`user/check?userEmail=${currentUser.email}`)
-            .then(response =>{
-                setUser(response.data[0])
-                console.log(response.data[0])
-                setLoader(null)
-                
-            })
-            .catch(error => console.log(error))
+
+            if (currentUser) {
+                axios.get(`user/check?userEmail=${currentUser.email}`)
+                    .then(response => {
+                        setUser(response.data[0])
+                        console.log(response.data[0])
+                        setLoader(null)
+
+                    })
+                    .catch(error => console.log(error))
+            }
         })
 
         //stop observing after unmount
         return unsubscribe()
-    },[])
+    }, [])
 
     // axios.get('/cookie').then(response =>console.log(response))
     // axios.get('/cookie-check').then(response =>console.log(response))
 
 
-    const contextData ={
+    const contextData = {
         user,
         setUser,
         loader,

@@ -3,19 +3,29 @@ import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const GoogleLoginBtn = ({ children }) => {
+const GoogleRegBtn = ({ children }) => {
     const navigate = useNavigate()
 
     const { user, setUser, googleSignIn } = useContext(AuthContex)
 
+
     const handleClick = () => {
         googleSignIn()
             .then(result => {
-                axios.get(`/user/google-login?userEmail=${result.user?.email}&newUser=false`)
+
+                const userData = {
+                    userName: result.user.displayName,
+                    userEmail: result.user.email,
+                    // profileImageURL: result.user.photoURL
+                }
+
+                axios.post(`/user/google-reg?userEmail=${result.user?.email}&newUser=true`, userData)
                     .then(response => {
+
                         localStorage.setItem('jwtAccessToken', response.headers.authorization)
                         setUser(response)
                         navigate('/')
+                        
                     })
                     .catch(err => console.log(err))
             })
@@ -27,4 +37,4 @@ const GoogleLoginBtn = ({ children }) => {
     );
 };
 
-export default GoogleLoginBtn;
+export default GoogleRegBtn;

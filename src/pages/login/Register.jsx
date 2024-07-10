@@ -5,19 +5,13 @@ import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { useForm } from "react-hook-form";
 import { AuthContex } from '../../providers/AuthProvider';
 import axios from 'axios';
-import useTokenGen from '../../hooks/useTokenGen';
+import GoogleRegBtn from '../../components/buttons/GoogleRegBtn';
 
 const Register = () => {
     const navigate = useNavigate()
 
     const [show, setShow] = useState(null);
     const { user, setUser, createUser, updateUser } = useContext(AuthContex)
-
-
-    // Getting JWT Token 
-    useTokenGen(user?.email)
-
-
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -34,8 +28,12 @@ const Register = () => {
                             userEmail: data.email,
                             password: data.password
                         }
-                        axios.post('/user/signup', userData)
-                            .then(response => console.log(response))
+                        axios.post(`/user/email-reg?userEmail=${data.email}&newUser=true`, userData)
+                            .then(response => {
+                                localStorage.setItem('jwtAccessToken', response.headers.authorization)
+                                setUser(response)
+
+                            })
                             .catch(err => console.log(err))
                     })
                     .catch((err) => console.log(err))
@@ -84,9 +82,9 @@ const Register = () => {
 
                 </form>
                 <div className='px-8'>
-                    <GoogleLoginBtn>
+                    <GoogleRegBtn>
                         <FcGoogle className='inline mx-2 text-xl'></FcGoogle>  Register with Google
-                    </GoogleLoginBtn>
+                    </GoogleRegBtn>
 
                 </div>
             </div>

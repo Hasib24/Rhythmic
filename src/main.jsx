@@ -14,7 +14,7 @@ const queryClient = new QueryClient()
 
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.interceptors.request.use((request)=>{
-  request.headers.authorizatn = `bearer ${localStorage.getItem('jwtAccessToken')}`
+  request.headers.authorizatn = localStorage.getItem('jwtAccessToken');
   return request
 })
 

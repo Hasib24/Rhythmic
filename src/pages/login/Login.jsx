@@ -3,9 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import GoogleLoginBtn from '../../components/buttons/GoogleLoginBtn';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContex } from '../../providers/AuthProvider';
-
 import { useForm } from "react-hook-form";
-import useTokenGen from '../../hooks/useTokenGen';
 import axios from 'axios';
 
 
@@ -14,8 +12,7 @@ const Login = () => {
     const { user, setUser, signInUser } = useContext(AuthContex)
 
 
-    // Getting JWT Token 
-    useTokenGen(user?.email)
+   
 
     //For Visitor as Admin
     const handleAdminVisitor =()=>{
@@ -39,7 +36,7 @@ const Login = () => {
         signInUser(data.email, data.password)
             .then(res => {
                 
-                axios.get(`/user/check?userEmail=${res.user?.email}`)
+                axios.get(`/user/email-login?userEmail=${res.user?.email}&newUser=false`)
                     .then(response => {
                         localStorage.setItem('jwtAccessToken', response.headers.authorization)
                         setUser(response)

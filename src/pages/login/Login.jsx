@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate()
-    const { user, setUser, signInUser } = useContext(AuthContex)
+    const { user, setUser, setLoader, signInUser } = useContext(AuthContex)
 
 
    
@@ -39,7 +39,9 @@ const Login = () => {
                 axios.get(`/user/email-login?userEmail=${res.user?.email}&newUser=false`)
                     .then(response => {
                         localStorage.setItem('jwtAccessToken', response.headers.authorization)
-                        setUser(response)
+                        setUser(response.data)
+                        setLoader(null)
+                        navigate('/')
                         
                         
                     })

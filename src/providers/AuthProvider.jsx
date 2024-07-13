@@ -47,12 +47,16 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 axios.get(`user/check?userEmail=${currentUser.email}`)
                     .then(response => {
-                        setUser(response.data[0])
-                        console.log(response.data[0])
+
+                        setUser(response.data)
+
                         setLoader(null)
 
                     })
-                    .catch(error => console.log(error))
+                    .catch(error =>{
+                        console.log(error.message)
+                        logOut()
+                    })
             }
         })
 

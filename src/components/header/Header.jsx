@@ -59,7 +59,6 @@ const Header = () => {
     }
 
 
-
     return (
         <header className={myScroll ? `z-10 px-5 flex items-center sticky top-0 bg-base-300 duration-700 shadow-md` : `z-10 px-5 flex sticky top-0 items-center bg-none duration-700`}>
             <div className=' flex justify-between items-center container mx-auto'>
@@ -75,18 +74,18 @@ const Header = () => {
                     <div className=' p-1 flex justify-end rounded-md md:hidden'>
                         {responsiveMenu ? <MdClose className='text-3xl z-50' onClick={() => setResponsiveMenu(!responsiveMenu)}></MdClose> : <GoThreeBars className='text-3xl z-50 ' onClick={() => setResponsiveMenu(!responsiveMenu)}></GoThreeBars>}
                     </div>
-                    <nav className={`text-xl flex flex-col -z-10 justify-between items-center md:block py-6  p-2 gap-1 w-3/4 min-w-[200px] border border-slate-600 shadow-2xl rounded-md backdrop-blur-md ${responsiveMenu ? `absolute right-0 top-0  ` : `absolute right-2 -top-56 opacity-0 `} md:static md:bg-inherit duration-300`}>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-slate-700 rounded-md p-2' to='/'>Home</NavLink>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-slate-700 rounded-md p-2' to='/classes'>Classes</NavLink>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-slate-700 rounded-md p-2' to='/instractors'>Instractors</NavLink>
+                    <nav className={`text-xl flex flex-col text-white -z-10 justify-between items-center md:block py-6  p-2 gap-1 sm:w-3/4 md:w-full min-w-[200px]  ${responsiveMenu ? `absolute right-0 top-0 z-20  border border-slate-600 shadow-2xl rounded-md backdrop-blur-xl ` : `absolute right-2 -top-96 `} md:static md:bg-inherit duration-300`}>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/'>Home</NavLink>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/classes'>Classes</NavLink>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/instractors'>Instractors</NavLink>
                         {
                             user ? <>
-                                <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full' to='/dashboard/dashboard'>Dashboard</NavLink>
+                                <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/dashboard/dashboard'>Dashboard</NavLink>
 
 
-                                <div className="dropdown dropdown-end">
+                                <div className="dropdown dropdown-end w-full px-3">
                                     <div tabIndex={0} role="button" className=" p-0 m-0">
-                                        <IoPersonCircleOutline className='cursor-pointer inline text-3xl ' />
+                                        <IoPersonCircleOutline className='cursor-pointer inline text-3xl ' /><span className='md:hidden'>{user?.userName}</span>
                                     </div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                                         <li>
@@ -116,6 +115,7 @@ const Header = () => {
                     </nav>
                 </div>
             </div>
+            <div onClick={()=>setResponsiveMenu(!responsiveMenu)} className={`absolute  left-0 top-0 bg-black/30 backdrop-blur-[1px] h-[100vh] w-[100vw] ${responsiveMenu ? `visible`:`hidden`}`}></div>
         </header>
     );
 };

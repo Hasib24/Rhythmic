@@ -53,13 +53,13 @@ const Login = () => {
 
 
     return (
-        <div className='relative min-h-[100vh] flex justify-center bg-[url("https://images.pexels.com/photos/1528411/pexels-photo-1528411.jpeg")] bg-cover'>
-            <div className='mx-3 min-w-[300px] md:mx-auto my-auto p-5 md:px-14 md:py-10 text-slate-100 shadow-2xl rounded-xl  backdrop-blur-sm border'>
+        <div className='relative min-h-[100vh] flex justify-center bg-[url("https://images.unsplash.com/photo-1617634795446-b58c985ec639?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")] bg-cover'>
+            <div className='mx-3 min-w-[300px] md:mx-auto my-auto p-5 md:px-14 md:py-10 text-slate-100 shadow-2xl rounded-xl  backdrop-blur-3xl border border-slate-600'>
                 <form className='p-8 max-w-md' onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("email", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type="email" name="email" id="email" placeholder='Enter email' />
-                    <input {...register("password", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200' type="password" name="password" id="password" placeholder='Enter password' />
+                    <input {...register("email", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200 border border-slate-600' type="email" name="email" id="email" placeholder='Enter email' />
+                    <input {...register("password", { required: true })} className='outline-none border rounded-md my-3 p-2 w-full md:mx-auto bg-inherit placeholder:text-slate-200 border border-slate-600' type="password" name="password" id="password" placeholder='Enter password' />
 
-                    <input className='border duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-slate-200' type="submit" name="submit" id="submit" value="Login" />
+                    <input className=' duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-slate-200 border border-slate-600' type="submit" name="submit" id="submit" value="Login" />
 
                     <p>Don't have an account ? <Link to='/register' className='text-green-400 underline'>Registeration</Link></p>
 

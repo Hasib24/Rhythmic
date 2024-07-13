@@ -9,14 +9,8 @@ import { AuthContex } from '../../providers/AuthProvider';
 
 const Header = () => {
     const navigate = useNavigate()
-    const { user, setUser, logOut } = useContext(AuthContex)
-    const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
-
-    useEffect(() => {
-        localStorage.setItem('theme', theme);
-        const localTheme = localStorage.getItem('theme')
-        document.querySelector('html').setAttribute('data-theme', localTheme)
-    }, [theme])
+    const { user, setUser, logOut, theme, setTheme } = useContext(AuthContex)
+    
 
     const hadleThemeToggle = (e) => {
         if (e.target.checked) {
@@ -75,12 +69,12 @@ const Header = () => {
                         {responsiveMenu ? <MdClose className='text-3xl z-50' onClick={() => setResponsiveMenu(!responsiveMenu)}></MdClose> : <GoThreeBars className='text-3xl z-50 ' onClick={() => setResponsiveMenu(!responsiveMenu)}></GoThreeBars>}
                     </div>
                     <nav className={`text-xl flex flex-col -z-10 justify-between items-center md:block py-6  p-2 gap-1 sm:w-3/4 md:w-full min-w-[200px]  ${responsiveMenu ? `absolute right-0 top-0 z-20  border border-slate-600 shadow-2xl rounded-md backdrop-blur-xl ` : `absolute right-2 -top-96 `} ${theme =="dark"?"text-slate-400":"text-slate-800"} md:static md:bg-inherit duration-300`}>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/'>Home</NavLink>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/classes'>Classes</NavLink>
-                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/instractors'>Instractors</NavLink>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full rounded-md p-2' to='/'>Home</NavLink>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full rounded-md p-2' to='/classes'>Classes</NavLink>
+                        <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full rounded-md p-2' to='/instractors'>Instractors</NavLink>
                         {
                             user ? <>
-                                <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full hover:bg-blue-600 rounded-md p-2' to='/dashboard/dashboard'>Dashboard</NavLink>
+                                <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full rounded-md p-2' to='/dashboard/dashboard'>Dashboard</NavLink>
 
 
                                 <div className="dropdown dropdown-end w-full px-3">

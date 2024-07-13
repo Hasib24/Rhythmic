@@ -7,7 +7,7 @@ const PopularInstrument = () => {
             <SectionHeader>Popular Instractors</SectionHeader>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
 
-                <div className='shadow-sky-600 shadow-md bg-base-200 hover:bg-base-300 rounded-lg p-10 flex justify-between m-5'>
+                <div className='backdrop-blur-3xl border border-slate-400  hover:bg-base-300 rounded-lg p-10 flex justify-between m-5 duration-300'>
                     <div>
                         <h1 className='text-xl'>Prokash Debnath</h1>
                         <h1>Vocal Instructor</h1>
@@ -20,7 +20,7 @@ const PopularInstrument = () => {
                     
                 </div>
 
-                <div className='shadow-sky-600 shadow-md bg-base-200 hover:bg-base-300 rounded-lg p-10 flex justify-between m-5'>
+                <div className='backdrop-blur-3xl border border-slate-400  hover:bg-base-300 rounded-lg p-10 flex justify-between m-5 duration-300'>
                     <div>
                         <h1 className='text-xl'>Rhidika Bissash</h1>
                         <h1>Music Instractor</h1>
@@ -32,7 +32,7 @@ const PopularInstrument = () => {
                     </div>
                     
                 </div>
-                <div className='shadow-sky-600 shadow-md bg-base-200 hover:bg-base-300 rounded-lg p-10 flex justify-between m-5'>
+                <div className='backdrop-blur-3xl border border-slate-400  hover:bg-base-300 rounded-lg p-10 flex justify-between m-5 duration-300'>
                     <div>
                         <h1 className='text-xl'>Walid Din Faruk</h1>
                         <h1>Instrumental Instructor</h1>

@@ -14,6 +14,8 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loader, setLoader] = useState(true)
+    const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
+
 
     const createUser = (email, pass) => {
         return createUserWithEmailAndPassword(auth, email, pass)
@@ -40,6 +42,13 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
+        localStorage.setItem('theme', theme);
+        const localTheme = localStorage.getItem('theme')
+        document.querySelector('html').setAttribute('data-theme', localTheme)
+    }, [theme])
+
+
+    useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoader(null)
@@ -53,7 +62,7 @@ const AuthProvider = ({ children }) => {
                         setLoader(null)
 
                     })
-                    .catch(error =>{
+                    .catch(error => {
                         console.log(error.message)
                         logOut()
                     })
@@ -77,7 +86,9 @@ const AuthProvider = ({ children }) => {
         updateUser,
         signInUser,
         googleSignIn,
-        logOut
+        logOut,
+        theme,
+        setTheme
     }
 
     return (

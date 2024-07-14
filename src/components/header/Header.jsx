@@ -54,7 +54,7 @@ const Header = () => {
 
 
     return (
-        <header className={myScroll ? `z-10 px-5 flex items-center sticky top-0 bg-base-300 duration-700 shadow-md` : `z-10 px-5 flex sticky top-0 items-center bg-none duration-700`}>
+        <header className={myScroll ? `z-50 px-5 flex items-center sticky top-0 bg-base-300 duration-700 shadow-md` : `z-10 px-5 flex sticky top-0 items-center bg-none duration-700`}>
             <div className=' flex justify-between items-center container mx-auto'>
                 <div className='flex items-center'>
                     <Link to='/'><SiMusicbrainz className='text-4xl'></SiMusicbrainz></Link>

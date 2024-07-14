@@ -38,7 +38,7 @@ const Carousel = ({ images, autoplay = true, loop = true, autoplayDelay = 2000 }
             <MdNavigateBefore onClick={goToPrevSlide} className='absolute top-1/2 left-4 transform -translate-y-1/2 mx-2 text-5xl text-slate-200' />
             <MdNavigateNext onClick={goToNextSlide} className='absolute top-1/2 right-4 transform -translate-y-1/2 mx-2 text-5xl text-slate-200' />
 
-            <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+            <div className="absolute z-30 bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                 {images.map((_, i) => (
                     <span
                         key={i}

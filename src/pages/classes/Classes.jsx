@@ -20,7 +20,7 @@ const Classes = () => {
     console.log(classesArray);
 
     return (
-        <section className='container mx-auto'>
+        <section className='container mx-auto min-h-[80vh]'>
             <SectionHeader>All Classes</SectionHeader>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 py-10'>
                 {

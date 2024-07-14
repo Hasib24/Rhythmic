@@ -77,7 +77,7 @@ const Header = () => {
                                 <NavLink style={navActvStyle} className='px-3 text-xl tracking-tight font-semibold active:text-slate-500 w-full rounded-md p-2' to='/dashboard/dashboard'>Dashboard</NavLink>
 
 
-                                <div className="dropdown dropdown-end w-full px-3">
+                                <div className={`${responsiveMenu ? 'w-full':''} dropdown dropdown-end px-3`}>
                                     <div tabIndex={0} role="button" className=" p-0 m-0">
                                         <IoPersonCircleOutline className='cursor-pointer inline text-3xl ' /><span className='md:hidden'>{user?.userName}</span>
                                     </div>

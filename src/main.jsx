@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 // Create a client
 const queryClient = new QueryClient()
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://rhythmic-server-ashy.vercel.app/';
 axios.interceptors.request.use((request)=>{
   request.headers.authorizatn = localStorage.getItem('jwtAccessToken');
   return request

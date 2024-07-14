@@ -23,14 +23,14 @@ const Carousel = ({ images, autoplay = true, loop = true, autoplayDelay = 2000 }
     };
 
     return (
-        <div className="relative container mx-auto overflow-hidden rounded-xl h-64">
+        <div className="relative container mx-auto overflow-hidden  rounded-xl">
             <div className="relative flex transition-transform duration-1000" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
                 {images.map((image, index) => (
                     <img
                         key={index}
                         src={image}
                         alt={`Slide ${index}`}
-                        className="w-full flex-shrink-0 object-cover"
+                        className=" flex-shrink-0 object-cover rounded-md w-full"
                     />
                 ))}
             </div>

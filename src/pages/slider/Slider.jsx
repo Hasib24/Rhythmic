@@ -1,18 +1,18 @@
 import React from 'react';
 import Carousel from '../../components/carousel/Carousel'; 
+import image1 from '../../assets/images/1.png';
+import image2 from '../../assets/images/2.png';
+import image3 from '../../assets/images/3.png';
+import image4 from '../../assets/images/4.png';
+import image5 from '../../assets/images/5.png';
+// Import additional images as needed
 
 const Slider = () => {
-    const images = [
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80",
-        "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80",
-        "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80",
-        "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        
-    ];
+    const images = [image1, image2, image3, image4, image5];
 
     return (
-        <section className='container mx-auto'>
-            <Carousel images={images} autoplay={false} loop={true} autoplayDelay={2000} />
+        <section className='container mx-auto py-20 '>
+            <Carousel images={images} autoplay={true} loop={true} autoplayDelay={3000} />
         </section>
     );
 };

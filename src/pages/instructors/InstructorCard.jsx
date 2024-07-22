@@ -1,25 +1,27 @@
 import React from 'react';
 
-const InstructorCard = () => {
-    return (
-        <>
-            <div className="grid md:grid-cols-2 rounded-lg bg-base-300 shadow-xl">
-                <figure><img className='rounded-t-lg md:rounded-l-lg' src="https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Movie"/></figure>
-                <div className="p-5">
-                  <h2 className="text-2xl">Instructor Name</h2>
-                  <h3>Email : instractor@gmail.com</h3>
-                  <p className='my-5'>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, suscipit!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nisi provident officiis fuga repellat quos.
-                  </p>
-                  <h3>Number of Classes : 412</h3>
-                  <div className="card-actions justify-end">
-                    <button className="w-full btn mt-10">See Classes</button>
-                  </div>
-                </div>
-            </div>
-        </>
-    );
+const InstructorCard = ({ instructor }) => {
+
+  let { instructorName, instructorEmail, image, description, numberOfClasses, slug } = instructor;
+  return (
+    <>
+      <div className="grid md:grid-cols-2 rounded-lg backdrop-blur-3xl border border-slate-600">
+        <figure className=''>
+          <img className='rounded-t-xl border md:rounded-r-none md:rounded-bl-lg h-full w-full object-cover' src={image} alt={`Image of ${instructorName}`} />
+        </figure>
+        <div className="p-6 md:p-10 flex flex-col justify-center">
+          <h2 className="text-2xl tracking-wider">{instructorName}</h2>
+          <h3>Email : {instructorEmail}</h3>
+          <p className='my-5 text-justify'>{description}</p>
+          <h3>Number of Classes : {numberOfClasses}</h3>
+          <div className="card-actions justify-end">
+            <button className="w-full btn mt-10 border border-slate-600 bg-transparent backdrop-blur-2xl">See Classes</button>
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
 };
 
 export default InstructorCard;

@@ -7,15 +7,15 @@ import useTitle from '../../../hooks/useTitle';
 
 const ManageUsers = () => {
     useTitle('Manage users')
-    const {user} = useContext(AuthContex)
+    const { user } = useContext(AuthContex)
 
     console.log(user);
-   
 
-    const { isLoading, isError, refetch, data : usersArray = [], error } = useQuery({
-        queryKey : ['userEmail', user?.userEmail],
-        queryFn : async () =>{
-            const response = await axios.get(`/user/list?email=${user.userEmail}`)
+
+    const { isLoading, isError, refetch, data: usersArray = [], error } = useQuery({
+        queryKey: ['userEmail', user?.userEmail],
+        queryFn: async () => {
+            const response = await axios.get(`/admin/user-list?email=${user.userEmail}`)
             return response
         }
     })
@@ -25,36 +25,36 @@ const ManageUsers = () => {
 
     return (
         <section className='md:px-5'>
-        <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left bg-base-200">
-                <thead className="text-xs  uppercase ">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
-                            Serial
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Name
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            email
-                        </th>
-                        
-                        <th scope="col" className="px-6 py-3 "  colSpan='2'>
-                            role
-                        </th>
-                        <th scope='col'>action</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* // table data  */}
-                    {usersArray?.data?.map((user, index, arry) =><ManageUsersRow user={user} key={index} index={index} refetch={refetch}></ManageUsersRow>)}
+            <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left bg-base-200">
+                    <thead className="text-xs  uppercase ">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                Serial
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                email
+                            </th>
 
-                </tbody>
-            </table>
-        </div>
+                            <th scope="col" className="px-6 py-3 " colSpan='2'>
+                                role
+                            </th>
+                            <th scope='col'>action</th>
 
-    </section>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* // table data  */}
+                        {usersArray?.data?.map((user, index, arry) => <ManageUsersRow user={user} key={index} index={index} refetch={refetch}></ManageUsersRow>)}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
     );
 };
 

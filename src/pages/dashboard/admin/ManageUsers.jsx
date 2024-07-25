@@ -9,9 +9,6 @@ const ManageUsers = () => {
     useTitle('Manage users')
     const { user } = useContext(AuthContex)
 
-    console.log(user);
-
-
     const { isLoading, isError, refetch, data: usersArray = [], error } = useQuery({
         queryKey: ['userEmail', user?.userEmail],
         queryFn: async () => {

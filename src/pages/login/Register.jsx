@@ -77,7 +77,7 @@ const Register = () => {
                     <input disabled={watch('password') != watch('cpassword')} className=' border duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-red-600 border-slate-600' type="submit" name="submit" value="Register" />
 
 
-                    <p>Already have an accounte ? <Link to='/login' className='text-green-300 font-semibold underline'>Login</Link></p>
+                    <p>Already have an accounte ? <Link to='/loginas' className='text-green-300 font-semibold underline'>Login</Link></p>
 
 
                 </form>

@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import useTitle from '../../hooks/useTitle';
 
-
 const Login = () => {
     useTitle('Login')
     const navigate = useNavigate()
@@ -58,8 +57,6 @@ const Login = () => {
                     <input className=' duration-700 text-white active:bg-blue-500 hover:bg-white hover:text-slate-800 cursor-pointer outline-none rounded-md my-3 w-full md:mx-auto py-2 font-semibold disabled:bg-slate-200 border border-slate-600' type="submit" name="submit" id="submit" value="Login" />
 
                     <p>Don't have an account ? <Link to='/register' className='text-green-400 underline'>Registeration</Link></p>
-
-
                 </form>
                 <div className={`p-8 max-w-md ${loader ? 'opacity-0' : 'opacity-100'}`}>
                     <h1 className=' text-center font-bold text-slate-100'>OR</h1>

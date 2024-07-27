@@ -24,8 +24,8 @@ const Header = () => {
         localStorage.removeItem('jwtAccessToken')
         logOut()
             .then(() => {
-                setUser(null)
                 navigate('/')
+                setUser(null)
             }).catch((error) => {
                 console.log(error.message);
             });

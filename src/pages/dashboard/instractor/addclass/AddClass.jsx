@@ -6,72 +6,81 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Ellipsis, Ring } from 'react-awesome-spinners'
 import useTitle from '../../../../hooks/useTitle';
+import { uploadBytesResumable, getDownloadURL, getStorage, ref } from 'firebase/storage';
+import app from '../../../../../firebase.config';
+import swal from 'sweetalert';
+
+
+
 
 const AddClass = () => {
   useTitle('Add class')
-  const [loadingRing, setLoadingRing] = useState(false)
+
   const navigate = useNavigate()
+  const [loadingRing, setLoadingRing] = useState(false)
+  const [progress, setProgress] = useState(0);
+  const [imageUrl, setImageUrl] = useState('');
   const { user } = useContext(AuthContex)
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
-  const imgUploadAPIKey = import.meta.env.VITE_IMAGE_API_KEY;
-  const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgUploadAPIKey}`
-  console.log(imgHostingUrl);
+
 
   const onSubmit = data => {
-
     setLoadingRing(true)
 
-    const formData = new FormData()
-    formData.append('image', data.image[0])
+    const image = data.image[0]
+    if (image) {
+      const storage = getStorage(app);
+      const storageRef = ref(storage, `class/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
 
-    fetch(imgHostingUrl, {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(imgResponse => {
-        if (imgResponse.success) {
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          setProgress(progress);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageUrl(downloadURL);
 
-          const classData = {
-            approveStatus: 'panding',
-            className: data.className,
-            photoUrl: imgResponse.data.display_url,
-            instractorName: user.displayName,
-            email: user.email,
-            totalSeat: data.totalSeat,
-            enrolls: 0,
-            feedback: '',
-            price: data.price
-          }
-          axios.post(`/addaclass?email=${user.email}`, classData)
-            .then(response => {
-
-              if (response.data.acknowledged) {
-
+            const classData = {
+              className: data.className,
+              instractorEmail: user.userEmail,
+              photoUrl: downloadURL,
+              totalSeat: parseInt(data.totalSeat),
+              price: parseInt(data.price)
+            }
+            
+            if(downloadURL){
+              axios.post("/instructor/add-class", classData)
+              .then(response =>{
                 setLoadingRing(false)
-                //sweet alart 
-                swal({
-                  title: "Success !",
-                  text: `You successfuly added the class !`,
-                  icon: "success",
-                  buttons: ["Add more", "See already added classes"],
-                  dangerMode: true,
-                })
-                  .then((confirm) => {
-                    if (confirm) {
-                      navigate('/dashboard/myclasses')
-                    } else {
-                      reset()
-                    }
+                if(response.status==200){
+                  swal({
+                    title: "Good job!",
+                    text: "You classs successfuly added!",
+                    icon: "success"
                   });
+                  navigate('/dashboard/myclasses')
+                }
 
+              })
+              .catch(error => console.log(error))
+            }
 
-              }
-            })
+            
+            
+
+          });
         }
-      })
+      );
+    }
 
+  
 
 
 

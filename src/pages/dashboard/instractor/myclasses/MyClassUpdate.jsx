@@ -9,6 +9,7 @@ import SectionHeader from '../../../../components/sectionHeader/SectionHeader';
 import { Ring } from 'react-awesome-spinners'
 import { useEffect } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 
 const MyClassUpdate = () =>{
@@ -20,14 +21,10 @@ const MyClassUpdate = () =>{
     const params = useParams()
     const navigate = useNavigate()
         
-    const imgUploadAPIKey = import.meta.env.VITE_IMAGE_API_KEY;
-    const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgUploadAPIKey}`
-
-
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
     useEffect(()=>{
-        axios.get(`/updateclass?email=${user.email}&id=${params.id}`)
+        axios.get(`/instructor/aclass?id=${params.id}`)
         .then(response =>setaClass(response.data) )
         .catch(error => console.log(error))
 
@@ -38,70 +35,67 @@ const MyClassUpdate = () =>{
 
     const onSubmit = data =>{
 
-        setLoadingRing(true)
+      swal("As a Guest you can't update!", {
+        icon: "warning",
+      });
 
-        const formData = new FormData()
-        formData.append('image', data.image[0])
+        // setLoadingRing(true)
+        // const formData = new FormData()
+        // formData.append('image', data.image[0])
 
-        fetch(imgHostingUrl, {
-          method : 'POST',
-          body : formData
-        })
-        .then(response =>response.json())
-        .then(imgResponse =>{
-          if(imgResponse.success){
+        // fetch(imgHostingUrl, {
+        //   method : 'POST',
+        //   body : formData
+        // })
+        // .then(response =>response.json())
+        // .then(imgResponse =>{
+        //   if(imgResponse.success){
 
-            const classData ={
-                approveStatus : 'panding',
-                className : data.className,
-                photoUrl : imgResponse.data.display_url,
-                instractorName : user.displayName,
-                email : user.email,
-                totalSeat : data.totalSeat,
-                enrolls : 0,
-                feedback : '',
-                price : data.price
-            }
+        //     const classData ={
+        //         approveStatus : 'panding',
+        //         className : data.className,
+        //         photoUrl : imgResponse.data.display_url,
+        //         instractorName : user.displayName,
+        //         email : user.email,
+        //         totalSeat : data.totalSeat,
+        //         enrolls : 0,
+        //         feedback : '',
+        //         price : data.price
+        //     }
 
        
-            axios.patch(`/updateclass?email=${user.email}&id=${params.id}`, classData)
-            .then(response =>{
+        //     axios.patch(`/updateclass?email=${user.email}&id=${params.id}`, classData)
+        //     .then(response =>{
 
-                console.log(response.data);
+        //         console.log(response.data);
 
-              if(response.data.acknowledged){
+        //       if(response.data.acknowledged){
                 
-                setLoadingRing(false)
-                //sweet alart 
-                swal({
-                  title: "Success !",
-                  text: `You successfuly updated the class !`,
-                  icon: "success",
-                  buttons:  ["Add more", "See already added classes"],
-                  dangerMode: true,
-                })
-                .then((confirm) => {
-                  if (confirm) {
-                      navigate('/dashboard/myclasses')
-                  } else {
-                    navigate('/dashboard/addclass')
-                  }
-                });
+        //         setLoadingRing(false)
+        //         //sweet alart 
+        //         swal({
+        //           title: "Success !",
+        //           text: `You successfuly updated the class !`,
+        //           icon: "success",
+        //           buttons:  ["Add more", "See already added classes"],
+        //           dangerMode: true,
+        //         })
+        //         .then((confirm) => {
+        //           if (confirm) {
+        //               navigate('/dashboard/myclasses')
+        //           } else {
+        //             navigate('/dashboard/addclass')
+        //           }
+        //         });
 
 
-              }
-            })
-          }
-        })
-
-
-        
+        //       }
+        //     })
+        //   }
+        // })
 
     };
-    // console.log(errors);
-
-
-
+    
     return (
         <section className='conatiner '>
             <SectionHeader>Update Class</SectionHeader>
@@ -132,12 +126,12 @@ const MyClassUpdate = () =>{
                 <div className="grid my-4 md:grid-cols-2 md:gap-10">
 
                   <div className="relative z-0 w-full mb-6 group">
-                    <input type="text" name="instractorName" id="instractorName" className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={user.displayName} disabled />
+                    <input type="text" name="instractorName" id="instractorName" className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={user.userName} disabled />
                     <label htmlFor="instractorName" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" >Instractor Name</label>
                   </div>
                 
                   <div className="relative z-0 w-full mb-6 group">
-                    <input type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={user.email} disabled  />
+                    <input type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={user.userEmail} disabled  />
                     <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" >Instractor EmaiL</label>
                   </div>
 

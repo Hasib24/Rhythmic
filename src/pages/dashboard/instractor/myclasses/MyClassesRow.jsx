@@ -15,6 +15,8 @@ const MyClassesRow = ({aClass, index, refetch}) => {
     const {user} = useContext(AuthContex)
     const navigate = useNavigate()
 
+    
+
     const handleDelete =() =>{
         // console.log(aClass._id);
         swal({
@@ -26,16 +28,21 @@ const MyClassesRow = ({aClass, index, refetch}) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-                axios.delete(`/deleteclass?email=${user.email}&id=${aClass._id}`)
-                .then(response =>{
-                    if(response.data.deletedCount){
-                        refetch()
-                        swal("Poof! Your class has been deleted!", {
-                            icon: "success",
-                          });
-                    }
-                })
-                .catch(error => console.log(error))
+
+                swal("As a Guest you can't delete!", {
+                    icon: "warning",
+                  });
+
+                // axios.delete(`/deleteclass?email=${user.email}&id=${aClass._id}`)
+                // .then(response =>{
+                //     if(response.data.deletedCount){
+                //         refetch()
+                //         swal("Poof! Your class has been deleted!", {
+                //             icon: "success",
+                //           });
+                //     }
+                // })
+                // .catch(error => console.log(error))
             }
           });
     }
@@ -76,7 +83,7 @@ const MyClassesRow = ({aClass, index, refetch}) => {
             {/* enrolls  */}
             <td className="px-6 py-4">
                 
-                {aClass.enrolls}
+                {aClass.totalEnrolls}
             </td>
             {/* feedback  */}
             <td className="px-6 py-4">
@@ -102,7 +109,7 @@ const MyClassesRow = ({aClass, index, refetch}) => {
             {/* status  */}
             <td className="px-6 py-4">
                 {
-                    aClass.approveStatus==='denyed' ? <span> <MdOutlineDoNotDisturb className='mr-2 inline text-red-600'></MdOutlineDoNotDisturb>{aClass.approveStatus} </span> : <span>{aClass.approveStatus==='panding' ? <LuLoader className='mr-2 inline animate-spin'></LuLoader> : <MdDone className='mr-2 inline text-green-600'></MdDone> }{aClass.approveStatus}</span>
+                    aClass.approveStatus==='Denyed' ? <span> <MdOutlineDoNotDisturb className='mr-2 inline text-red-600'></MdOutlineDoNotDisturb>{aClass.approveStatus} </span> : <span>{aClass.approveStatus==='Panding' ? <LuLoader className='mr-2 inline animate-spin'></LuLoader> : <MdDone className='mr-2 inline text-green-600'></MdDone> }{aClass.approveStatus}</span>
                 }
                 
                 

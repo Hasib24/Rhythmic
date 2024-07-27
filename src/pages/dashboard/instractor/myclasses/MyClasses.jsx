@@ -16,15 +16,14 @@ const MyClasses = () => {
     const { isLoading, isError, refetch, data : classesArray = [], error } = useQuery({
         queryKey : ['myclasses', user?.email],
         queryFn : async () =>{
-            const response = await axios.get(`/myclasses?email=${user.email}`)
+            const response = await axios.get(`/instructor/my-classes?userEmail=${user.userEmail}`)
             return response.data
         }
     })
 
-    // console.log(classesArray);
     
     return (
-        <section className='md:px-5'>
+        <section className='md:px-5 min-h-[50vh]'>
             <SectionHeader>My Classes</SectionHeader>
             <div className="container mx-auto my-10 relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left bg-base-200">
@@ -57,7 +56,7 @@ const MyClasses = () => {
                     </thead>
                     <tbody>
                         
-                        {classesArray?.map((aClass, index, arry) =><MyClassesRow aClass={aClass} key={index} index={index} refetch={refetch}></MyClassesRow>)}
+                        {!classesArray.length ? <tr><td colSpan={7} className='text-center py-36 font-semibold'>Not found</td></tr> : classesArray?.map((aClass, index, arry) =><MyClassesRow aClass={aClass} key={index} index={index} refetch={refetch}></MyClassesRow>)}
 
                     </tbody>
                 </table>

@@ -21,14 +21,15 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
       }
       
       
-      axios.patch('/feedback', feedbackData)
+      axios.patch('/admin/feedback-update', feedbackData)
       .then(response =>{
-        if(response.data.modifiedCount){
+        if(response){
           setFeedbackDisable(true)
           feedbackRef.current.value = ''
           refetch()
           
         }
+
 
       })
       .then(error => console.log(error))
@@ -44,13 +45,13 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
 
       swal({
         title: "Are you sure?",
-        text: `Once ${status}, you will not be able to deny this class!`,
+        text: `Once ${status}, you will not be able to change this class!`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
       }).then((ok) => {
         if (ok) {
-          axios.patch(`/statusupdate?email=${user.email}`, statusData)
+          axios.patch(`/admin/status-update?`, statusData)
           .then(response =>{ 
             if(response.data.modifiedCount){
             swal(`Poof! You ${status} the class!`, {
@@ -62,9 +63,9 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
           }})
 
           .catch(error => console.log(error))
-        } else {
-          swal("Your changed your mind!");
-        }
+        } 
+    
+        
       });
 
 
@@ -87,8 +88,7 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
             <div className="card-body">
                 <h2>Current status : <button className='btn btn-xs btn-outline'>{aClass.approveStatus}</button> { aClass.feedback && <button className='btn btn-xs btn-outline btn-info'>already feedbacked</button> } </h2>
                 <h2>Class name : {aClass.className}</h2>
-                <h2>Instractor name : {aClass.instractorName}</h2>
-                <h2>Instractor email : {aClass.email}</h2>
+                <h2>Instractor email : {aClass.instractorEmail}</h2>
                 <h2>Price : {aClass.price}$</h2>
                 <h2>Total Seat : {aClass.totalSeat}</h2>
 
@@ -96,7 +96,7 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
 
                 {/* Buttons: Approve, Send Feedback, Deny  */}
                 {
-                  aClass.approveStatus==='panding' && <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveDenyBtn('approved')}>Approve</button>
+                  aClass.approveStatus==='Panding' && <button className='btn btn-accent btn-outline mx-2' onClick={()=>handleApproveDenyBtn('Approved')}>Approve</button>
                 }
                 
                 { 
@@ -104,7 +104,7 @@ const ManageClassesRow = ({aClass, index, refetch}) => {
                 }
 
                 {
-                  aClass.approveStatus==='panding' && <button className='btn btn-error btn-outline mx-2' onClick={()=>handleApproveDenyBtn('denyed')}>Deny</button>
+                  aClass.approveStatus==='Panding' && <button className='btn btn-error btn-outline mx-2' onClick={()=>handleApproveDenyBtn('Denyed')}>Deny</button>
                 }
 
 

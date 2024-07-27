@@ -14,9 +14,9 @@ const ManageClasses = () => {
 
        // tenStack query to load all classes 
        const { isLoading, isError, refetch, data : classesArray = [], error } = useQuery({
-        queryKey : ['allclasses', user?.email],
+        queryKey : ['allclasses', user?.userEmail],
         queryFn : async () =>{
-            const response = await axios.get(`/allclasses?email=${user.email}`)
+            const response = await axios.get(`/admin/manage-classes?email=${user.userEmail}`)
             return response.data
         }
     })
